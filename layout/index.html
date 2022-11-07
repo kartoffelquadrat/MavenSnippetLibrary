@@ -62,6 +62,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#project-layout" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -196,10 +201,50 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Maven Project Layout
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         Maven Project Layout
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#files-and-folders" class="md-nav__link">
+    Files and Folders
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#groupid-artifactid-packages" class="md-nav__link">
+    GroupId, ArtifactId, Packages
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -287,6 +332,46 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#files-and-folders" class="md-nav__link">
+    Files and Folders
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#groupid-artifactid-packages" class="md-nav__link">
+    GroupId, ArtifactId, Packages
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -294,14 +379,32 @@
                 
 
 
-  <h1>Maven Project Layout</h1>
-
-<p>Folder layout</p>
-<p><img alt="folderlayout" src="../captures/folderlayout.png" /></p>
+<h1 id="project-layout">Project Layout</h1>
+<p>You might be used from other programming languages or simpler projects to just throw in you code files at random place and click a green triangle start button in your IDE without much trouble.</p>
+<p>While this may work for some toy examples or little scripting tools, hacked in a day, bigger software projects often have a long list of requirements and likewise are expected to compile and run reliable no matter to platform or developer cloning the project.</p>
+<p>This is where maven enters the game. Maven replaces drag and click based project configuration where a developer sets up their project via IDE menus, by a central xml textual description, the <code>`pom.xml</code>.</p>
+<h2 id="files-and-folders">Files and Folders</h2>
+<p>The root of a maven project should roughly look like this:
+<img alt="folderlayout" src="../captures/folderlayout.png" /></p>
+<p>Before we go into the details, not that there are two important entires at root level:</p>
 <ul>
-<li>The items marked in red are mandated by maven. This structure has to be exactly like above.</li>
-<li>The items marked blue are your group id. Of course you should not use my id "eu/kartoffelquadrat", but something that represents your group, e.g. comp361/hexanomeXX</li>
-<li>The item marked yellow is your artifactid. That one describes your software. It should be splendorclient.</li>
+<li><code>pom.xml</code> which contains all project configuration. Almost everything presented on this webpage are snippets that extend this file.</li>
+<li>A <code>src</code> folder, all your source code, tests, even resources go somewhere into that folder.</li>
+</ul>
+<p>Depending on which configurations you add to your <code>pom.xml</code> you might have addition content on top level. But for a start these are the minimum requirement for your project at root level.</p>
+<p>Next let's look at the content of the <code>src</code> folder. Everything that carries a red marker in the capture above must be in place, exactly as shown for your project to be valid.</p>
+<ul>
+<li>Your java sources go into <code>src/main/java</code></li>
+<li>Your java tests fo into <code>src/test/java</code></li>
+<li>Your resource files go into <code>src/main/resources</code></li>
+</ul>
+<h2 id="groupid-artifactid-packages">GroupId, ArtifactId, Packages</h2>
+<p>In the <code>test/java</code> and <code>src/java</code> folder you see subfolders: <code>eu/kartoffelquadrat/printer</code>.</p>
+<ul>
+<li><code>eu/kartoffelquadrat</code> has a green label. This on represents your <code>groupId</code>. The <code>groupId</code> is specific to the developer or team of developers responsible for the project. By convention it is the inverted domain name of your affiliation. So for instance if you are a student at McGill you could use: <code>ca/mcgill</code> instead of <code>eu/kartoffelquadrat</code>.<br />
+<strong>Do not use ```eu/kartoffelquadrat</strong> for your projects. That domain is owned by me, so you better not pretend to release software on my behalf. ;)</li>
+<li><code>printer</code> is the <code>artifactId</code>. It describes the specific purpose of your project. For instance if you are developing a board game tic tac toe client, it could be <code>ticTacToeClient</code>.</li>
+<li>Optionally you can create further subfolders for packages. E.g. if you have an MVC structure you can place parallel folders for <code>model</code>, <code>view</code>, <code>control</code> under your <code>artifactId</code>. This is optional. </li>
 </ul>
 
               
