@@ -11,56 +11,56 @@ Link to google checks file
 Code snipped:
 
 ```xml
-<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <configLocation>google_checks.xml</configLocation>
-                    <consoleOutput>true</consoleOutput>
-                    <violationSeverity>warning</violationSeverity>
-                    <failOnViolation>true</failOnViolation>
-                    <failsOnError>true</failsOnError>
-                    <linkXRef>false</linkXRef>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+    <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-checkstyle-plugin</artifactId>
+	<version>3.2.0</version>
+	<configuration>
+	    <configLocation>google_checks.xml</configLocation>
+	    <consoleOutput>true</consoleOutput>
+	    <violationSeverity>warning</violationSeverity>
+	    <failOnViolation>true</failOnViolation>
+	    <failsOnError>true</failsOnError>
+	    <linkXRef>false</linkXRef>
+	</configuration>
+	<executions>
+	    <execution>
+		<id>validate</id>
+		<phase>validate</phase>
+		<goals>
+		    <goal>check</goal>
+		</goals>
+	    </execution>
+	</executions>
+    </plugin>
 ```
 
 ## JavaDoc Parameter Check
 
 ```xml
-<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.4.0</version>
-                <configuration>
-                    <source>8</source>
-                    <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
-                    <reportOutputDirectory>${project.reporting.outputDirectory}/docs
-                    </reportOutputDirectory>
-                    <destDir>docs</destDir>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <failOnWarnings>true</failOnWarnings>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+    <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-javadoc-plugin</artifactId>
+	<version>3.4.0</version>
+	<configuration>
+	    <source>8</source>
+	    <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+	    <reportOutputDirectory>${project.reporting.outputDirectory}/docs
+	    </reportOutputDirectory>
+	    <destDir>docs</destDir>
+	</configuration>
+	<executions>
+	    <execution>
+		<id>attach-javadocs</id>
+		<goals>
+		    <goal>jar</goal>
+		</goals>
+		<configuration>
+		    <failOnWarnings>true</failOnWarnings>
+		</configuration>
+	    </execution>
+	</executions>
+    </plugin>
 ```
 
 Generates to top level ```docs``` folder.
@@ -71,21 +71,21 @@ The ```failOnWarnings```:```true``` entry ensures your program does not compile 
 
 dependency:
 ```xml
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.10</version>
+        <scope>test</scope>
+    </dependency>
 ```
 
 plugin:
 ```xml
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
-            </plugin>
+    <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-surefire-plugin</artifactId>
+	<version>2.22.2</version>
+    </plugin>
 ```
 
 Refuses build anless all unit tests defines in ```src/test/java``` pass.
