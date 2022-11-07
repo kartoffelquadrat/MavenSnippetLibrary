@@ -9,9 +9,7 @@ The Maven Snippet Library is [hosted on Github Pages](https://kartoffelquadrat.g
 ## Build
 
 ```bash
-mkdocs build
-rm -rf docs
-mv site docs
+./compile.sh
 ```
 
 
