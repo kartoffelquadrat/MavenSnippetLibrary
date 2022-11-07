@@ -4,7 +4,7 @@ This is a little repo to provide tested and proven maven snipped, ready for copy
 
 ## Access
 
-The Maven Snippet Library is hosted on Github Pages.
+The Maven Snippet Library is [hosted on Github Pages](https://kartoffelquadrat.github.io/MavenSnippetLibrary).
 
 ## Build
 
