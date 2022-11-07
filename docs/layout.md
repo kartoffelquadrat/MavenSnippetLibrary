@@ -29,6 +29,6 @@ Next let's look at the content of the ```src``` folder. Everything that carries 
 In the ```test/java``` and ```src/java``` folder you see subfolders: ```eu/kartoffelquadrat/printer```.
 
  * ```eu/kartoffelquadrat``` has a green label. This on represents your ```groupId```. The ```groupId``` is specific to the developer or team of developers responsible for the project. By convention it is the inverted domain name of your affiliation. So for instance if you are a student at McGill you could use: ```ca/mcgill``` instead of ```eu/kartoffelquadrat```.  
-**Do not use ```eu/kartoffelquadrat** for your projects. That domain is owned by me, so you better not pretend to release software on my behalf. ;)
+**Do not use ```eu/kartoffelquadrat``` for your projects.** That domain is owned by me, so you better not pretend to release software on my behalf. ;)
  *  ```printer``` is the ```artifactId```. It describes the specific purpose of your project. For instance if you are developing a board game tic tac toe client, it could be ```ticTacToeClient```.
  * Optionally you can create further subfolders for packages. E.g. if you have an MVC structure you can place parallel folders for ```model```, ```view```, ```control``` under your ```artifactId```. This is optional. 

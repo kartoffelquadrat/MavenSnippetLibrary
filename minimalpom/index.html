@@ -219,9 +219,47 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Minimal Pom
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Minimal Pom
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#template" class="md-nav__link">
+    Template
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changes" class="md-nav__link">
+    Changes
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -307,6 +345,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#template" class="md-nav__link">
+    Template
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changes" class="md-nav__link">
+    Changes
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -320,6 +380,9 @@
 
 
 <h1 id="miminal-pom">Miminal Pom</h1>
+<p>Once you have decided on your <code>groupId</code>, <code>artifactId</code> and set up the required folder structure, the next step is to create a minimal <code>pom.xml</code>.<br />
+You can use below template as starting point, although you will need to make some minor changes.</p>
+<h2 id="template">Template</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
@@ -371,6 +434,15 @@
 <a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>    &lt;/build&gt;
 <a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>&lt;/project&gt;
 </code></pre></div>
+<h2 id="changes">Changes</h2>
+<ul>
+<li>Replace the <code>groupId</code> tag content by something that <a href="layout/#groupid-artifactid-packages">describes your group</a>.</li>
+<li>Replace the <code>artifactId</code> tag content by something that <a href="layout/#groupid-artifactid-packages">describes your project purpose</a>.</li>
+<li>Update the <code>name</code> tag to a single human readable word, describing your product.</li>
+<li>Update the <code>build.name</code> variable to a camelCase description of your product, as you want the generated executable file to be named.</li>
+<li><strong>Update the developer name and info! Do not use my name!</strong></li>
+<li>Choose a license, or remove the license block if you want to reserve all rights.</li>
+</ul>
 
               
             </article>
