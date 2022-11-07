@@ -1,0 +1,28 @@
+site_name: Maven Snippet Library
+site_url: https://www.cs.mcgill.ca/MavenSnippetLibrary
+nav:
+    - Welcome: index.md
+    - Maven Project Layout: layout.md
+    - Minimal Pom: minimalpom.md
+    - Direct Run: run.md
+    - IDE Integration: ideintegration.md
+    - Dependency Management: dependencies.md
+    - Best Practices: bestpractices.md
+theme:
+  name: material
+  logo: assets/logo.png
+  palette:
+    scheme: mcgill
+    accent: red
+extra_css:
+    - stylesheets/extra.css
+markdown_extensions:
+    - tables
+    - pymdownx.tabbed:
+        alternate_style: true 
+    - pymdownx.highlight:
+        anchor_linenums: true
+    - pymdownx.inlinehilite
+    - pymdownx.snippets
+    - pymdownx.superfences
+
