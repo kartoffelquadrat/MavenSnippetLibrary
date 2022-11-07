@@ -4,9 +4,9 @@ nav:
     - Welcome: index.md
     - Maven Project Layout: layout.md
     - Minimal Pom: minimalpom.md
+    - Dependency Management: dependencies.md
     - Direct Run: run.md
     - IDE Integration: ideintegration.md
-    - Dependency Management: dependencies.md
     - Best Practices: bestpractices.md
 theme:
   name: material

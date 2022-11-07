@@ -62,6 +62,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#compile-time-dependencies" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -218,6 +223,89 @@
 
   
   
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Dependency Management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Dependency Management
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+    <nav class="md-nav" aria-label="Motivation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-classpath" class="md-nav__link">
+    The Classpath
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mavens-dependency-model" class="md-nav__link">
+    Mavens Dependency Model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finding-libraries" class="md-nav__link">
+    Finding Libraries
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
   
     <li class="md-nav__item">
       <a href="../run/" class="md-nav__link">
@@ -248,29 +336,6 @@
 
   
   
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Dependency Management
-      </a>
-      
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
   
     <li class="md-nav__item">
       <a href="../bestpractices/" class="md-nav__link">
@@ -287,6 +352,66 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+    <nav class="md-nav" aria-label="Motivation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-classpath" class="md-nav__link">
+    The Classpath
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mavens-dependency-model" class="md-nav__link">
+    Mavens Dependency Model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finding-libraries" class="md-nav__link">
+    Finding Libraries
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -294,9 +419,46 @@
                 
 
 
-  <h1>Dependency Management</h1>
-
-
+<h1 id="compile-time-dependencies">Compile Time Dependencies</h1>
+<p>Most programmers at first are puzzled by the complexity of library integration. The habit of dragging needed libraries at random points graphically into your IDE unfortunately conceals the actual complexity of code dependencies.  </p>
+<h2 id="motivation">Motivation</h2>
+<p>While the drag and drop approach might work for a single developer, it is not a reliable approach for fast workstation setup or even scenarios where not graphical access to the code exists (compiling on a server via SSH).</p>
+<h3 id="the-classpath">The Classpath</h3>
+<p>What actually happens when you try to compile a piece of software that calls a library is that the java compiler sets out for journey to localize the library you are referring to. Unfortunately just writing the import statement, or calling a library is insufficient. What the compiler actually needs is a classpath reference. (The classpath is a bit like the PATH variable on your operating system. It indexes all the software installed, only in this case specifically for java libraries)</p>
+<p>In principle you could manually download all libraries your project needs and manually alter the classpath every time you compile or run your software. When you drag and drop a library jar file on your IDE that actually happens implicitly.</p>
+<p>The problem is that this only solves the issue for the very machine you are working on, not for any other developer who clones your project.</p>
+<p>This is once more where maven comes to rescue. Maven has a dedicated part in the <code>pom.xml</code> file to indicate all dependencies textually. Since the <code>pom.xml</code> resides alongside the sources of your project, everyone who want to work with your project automatically gets all it's dependencies, store between the <code>&lt;dependencies&gt;...&lt;/dependencies&gt;</code> tags.</p>
+<h3 id="mavens-dependency-model">Mavens Dependency Model</h3>
+<p>The Maven <code>pom.xml</code> only stores a unique description of your dependencies, not the referenced libraries themselves. Luckily! Otherwise your repository would rapidly exceed a tolerable size.</p>
+<p>A dependency entry might look like this:  </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&lt;dependency&gt;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="nt">&lt;groupId&gt;</span>commons-io<span class="nt">&lt;/groupId&gt;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="nt">&lt;artifactId&gt;</span>commons-io<span class="nt">&lt;/artifactId&gt;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="nt">&lt;version&gt;</span>2.11.0<span class="nt">&lt;/version&gt;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<p>When Maven find the above entry it will run the following procedure:</p>
+<ul>
+<li>Check if you already have the referenced dependency locally (maven has a local buffer in your homedirectory, <code>.m2</code> folder)</li>
+<li>If not yet found locally, maven contacts the official library servers and downloads the jar for you. It then stores it in your local buffer, so things are faster next time.</li>
+</ul>
+<p>Once the dependency is resolved, Maven adds the locally downloaded artifact to your CLASSPATH. This means starting now, any reference from code can be correctly resolved.</p>
+<p>The great thing about this procedure is: If your pom.xml evolves, all develeopers have automatically the full list of all dependencies, and the right versions - without a single mouse click in IDE menus. <strong>It just works! Reliably.</strong></p>
+<h2 id="finding-libraries">Finding Libraries</h2>
+<p>At this point you might wonder how on earth you are supposed to figure out the correct dependency entry for the library you need.<br />
+Luckily this has been made very simple for you. If e.g. you are looking for the <em>Apache Commons IO</em> library, to conveniently load files from disk you can simply:</p>
+<ul>
+<li>Visit the maven central: <a href="https://mvnrepository.com/">https://mvnrepository.com/</a></li>
+<li>Search for the needed artifact: <a href="https://mvnrepository.com/artifact/commons-io/commons-io">Apache Commons IO</a></li>
+<li>Click the version number:  Usually you want <a href="https://mvnrepository.com/artifact/commons-io/commons-io/2.11.0">the most recent one</a></li>
+<li>Copy and paste the dependency block into your <code>pom.xml</code><br />
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&lt;dependency&gt;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="nt">&lt;groupId&gt;</span>commons-io<span class="nt">&lt;/groupId&gt;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="nt">&lt;artifactId&gt;</span>commons-io<span class="nt">&lt;/artifactId&gt;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="nt">&lt;version&gt;</span>2.11.0<span class="nt">&lt;/version&gt;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></li>
+</ul>
 
               
             </article>
@@ -310,7 +472,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../ideintegration/" class="md-footer__link md-footer__link--prev" aria-label="Previous: IDE Integration" rel="prev">
+        <a href="../minimalpom/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Minimal Pom" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -319,20 +481,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              IDE Integration
+              Minimal Pom
             </div>
           </div>
         </a>
       
       
         
-        <a href="../bestpractices/" class="md-footer__link md-footer__link--next" aria-label="Next: Best Practices" rel="next">
+        <a href="../run/" class="md-footer__link md-footer__link--next" aria-label="Next: Direct Run" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Best Practices
+              Direct Run
             </div>
           </div>
           <div class="md-footer__button md-icon">
