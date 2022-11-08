@@ -5,21 +5,20 @@ The default way to compile a maven project is therefore by command line.
 
 ## Run Plugins and Commands
 
-To run a program you need to point to the launcher class.  
-(There can also be programs with multiple launcher classes, but this corner case we deal with later.)
+To run a program you need to have your ```pom.xml``` point to the desired launcher class.  
+There can also be programs with multiple launcher classes, but this corner case we deal with later.
 
-On top, the startup procedure is often also dependent on the framework or library you are using. Especially GUI and reflective libraries tend to overload the default ```javaagent``` and therefore also bring their own plugin.
+On top, the startup procedure is often also dependent on the framework or library you are using. Especially GUI and reflective libraries tend to [overload the default ```javaagent```](https://www.baeldung.com/java-instrumentation#:~:text=In%20general%2C%20a%20java%20agent,javaagent%20parameter%20at%20JVM%20startup) and therefore also bring their own plugins that need to be added to the ```pom.xml```.
 
 ### Plugins
 
 Maven plugins, like [dependencies](dependencies/#the-classpath) are (once included in the ```pom.xml```) downloaded and added to the .m2 directory and classpath. However plugins are commonly compile-time dependencies, not run-time dependencies like libraries. Plugins merely target a modification of the default build and run process.
 
-In the [default ```pomx.ml```](minimalpom/#template) you already see an empty  
+In the [default ```pom.xml```](minimalpom/#template) you already see an empty section for plugins:  
 ```xml
         <plugins>
         </plugins>
 ```
-section.
 
 All xml snippets shown in the following go directly within these tags.
 

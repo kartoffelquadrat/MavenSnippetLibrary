@@ -20,7 +20,7 @@ Before we go into the details, note that there are two important entires at root
 
 Depending on which configurations you add to your ```pom.xml```, you might have additional content on top level. But for a start these are the minimum requirement for your project at root level.
 
-Next let's look at the nested content of the ```src``` folder. Everything that carries a red marker in the capture above must be in place **exactly as shown**. If you alter that structure, your project simply is not valid and there are zero guarantees for what happens when someone else attempts to build build and run it.
+Next let's look at the nested content of the ```src``` folder. Everything that carries a red marker in the capture above must be in place **exactly as shown**. If you alter that structure, your project simply is not valid and there are zero guarantees for what happens when someone else attempts to build and run it.
 
  * Your java sources go into ```src/main/java```
  * Your java tests fo into ```src/test/java```
@@ -30,7 +30,7 @@ Next let's look at the nested content of the ```src``` folder. Everything that c
 
 In the ```test/java``` and ```src/java``` folder you see subfolders: ```eu/kartoffelquadrat/printer```.
 
- * ```eu/kartoffelquadrat``` has a green label. This on represents your ```groupId```. The ```groupId``` is specific to the developer (or team of developers) responsible for the project. By convention it is the inverted domain name of your affiliation. So for instance if you are a student at McGill you could use: ```ca/mcgill``` instead of ```eu/kartoffelquadrat```. It can also be longer than two segments, but it seems to have become an unwritten convention to use two segments.  
+ * ```eu/kartoffelquadrat``` has a blue label. This on represents your ```groupId```. The ```groupId``` is specific to the developer (or team of developers) responsible for the project. By convention it is the inverted domain name of your affiliation. So for instance if you are a student at McGill you could use: ```ca/mcgill``` instead of ```eu/kartoffelquadrat```. It can also be longer than two segments, but it seems to have become an unwritten convention to use two segments.  
  > **Do not use ```eu/kartoffelquadrat``` for your projects.** That domain is owned by me, so you better not pretend to release software on my behalf. ;)
- *  ```printer``` is the ```artifactId```. It describes the specific purpose of your project. For instance if you are developing a board game *tic tac toe* client, it could be ```ticTacToeClient```.
- * Optionally you can create further subfolders for packages. E.g. if you have an MVC structure you can place parallel folders for ```model```, ```view```, ```control``` under your ```artifactId```. Packages are optional for smaller projects, but for everything that has more than 5 classes, things can get very confusing without packages.
+ *  ```liveprogramming``` is the ```artifactId```. It has a yellow label. It describes the specific purpose of your project. For instance if you are developing a board game *tic tac toe* client, it could be ```ticTacToeClient```.
+ * Optionally you can create further subfolders for sub-packages (purple label). E.g. if you have an MVC structure you can place parallel folders for ```model```, ```view```, ```control``` under your ```artifactId```. Packages are optional for smaller projects, but for everything that has more than 5 classes, things can get very confusing without packages.

@@ -290,6 +290,19 @@
     Finding Libraries
   </a>
   
+    <nav class="md-nav" aria-label="Finding Libraries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sample-library-use" class="md-nav__link">
+    Sample Library Use
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -418,6 +431,19 @@
     Finding Libraries
   </a>
   
+    <nav class="md-nav" aria-label="Finding Libraries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sample-library-use" class="md-nav__link">
+    Sample Library Use
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -437,18 +463,18 @@
 <h1 id="compile-time-dependencies">Compile Time Dependencies</h1>
 <p>Most programmers at first are puzzled by the complexity of library integration. The habit of graphically dragging libraries at random points into your IDE unfortunately conceals the actual complexity of code dependencies.</p>
 <h2 id="motivation">Motivation</h2>
-<p>While the drag and drop approach might work for a single developer and a simple project, it is not a reliable approach for fast workstation setup or even scenarios where not graphical access to the code exists (compiling on a server via SSH).</p>
+<p>While the drag and drop approach might work for a single developer and a simple project, it is not a reliable approach for fast workstation setup or even scenarios where no graphical access to the code exists (e.g. compiling on a server via SSH).</p>
 <h3 id="the-classpath">The Classpath</h3>
-<p>What actually happens when you try to compile a piece of software (depending on a library call) is that the java compiler sets out for journey to localize the library you are referring to.  Unfortunately by just writing the import statement, or calling a library the compiler has no clue where to actually find the library byte code. What the compiler actually needs is a <code>classpath</code> reference, pin pointing exactly to the location on disk. (The <code>classpath</code> is a bit like the <code>PATH</code> variable on your operating system. It indexes all the software installed, only in this case specifically for java libraries)</p>
+<p>What actually happens when you try to compile a piece of software (depending on a library call) is that the java compiler sets out for journey to localize the library you are referring to.  Unfortunately by just writing the import statement, or calling a library the compiler has no clue where to actually find the library byte code. What the <a href="https://stackoverflow.com/a/2396759">compiler actually needs is a <code>classpath</code></a> reference, pin-pointing exactly to a valid location on disk. (The <code>classpath</code> is a bit like the <code>PATH</code> variable on your operating system. It indexes all the software installed, only in this case specifically for java libraries)</p>
 <ul>
 <li>
-<p>In principle you could manually download all libraries your project needs and manually alter the <code>classpath</code> every time you compile or run your software. When you drag and drop a library jar file on your IDE that actually happens implicitly.</p>
+<p>In principle you could manually download all libraries your project needs and manually alter the <code>classpath</code> every time you compile or run your software. When you drag and drop a library jar file on your IDE that process might happen implicitly.</p>
 </li>
 <li>
-<p>The problem is that this only solves the issue for the very machine you are working on, not for any other developer who clones your project.</p>
+<p>The problem is that drag and drop only solves the issue for the very machine you are working on, not for any other developer who clones your project.</p>
 </li>
 </ul>
-<p>This is once more where maven comes to rescue. Maven has a dedicated part in the <code>pom.xml</code> file to indicate all dependencies textually. Since the <code>pom.xml</code> resides alongside the sources of your project, everyone who want to work with your project automatically gets all it's dependencies, store between the <code>&lt;dependencies&gt;...&lt;/dependencies&gt;</code> tags.</p>
+<p>This is once more where maven comes to rescue. Maven has a dedicated part in the <code>pom.xml</code> file to indicate all dependencies textually. Since the <code>pom.xml</code> resides alongside the sources of your project, everyone who want to work with your project automatically gets all it's dependencies, stored between the <code>&lt;dependencies&gt;...&lt;/dependencies&gt;</code> tags.</p>
 <h3 id="mavens-dependency-model">Mavens Dependency Model</h3>
 <p>The Maven <code>pom.xml</code> only stores a unique description of your dependencies, not the referenced libraries themselves. Luckily! Otherwise your repository would rapidly exceed a tolerable size.</p>
 <p>A dependency entry might look like this:  </p>
@@ -458,19 +484,20 @@
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="nt">&lt;version&gt;</span>2.11.0<span class="nt">&lt;/version&gt;</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
-<p>When Maven find the above entry it will run the following procedure:</p>
+<p>When Maven finds the above entry, it will run the following procedure:</p>
 <ul>
-<li>Check if you already have the referenced dependency locally (maven has a local buffer in your homedirectory, <code>.m2</code> folder)</li>
+<li>Check if you already have the referenced dependency locally (maven has a local buffer in your homedirectory <code>.m2</code> folder)</li>
 <li>If not yet found locally, maven contacts the official library servers and downloads the jar for you. It then stores it in your local buffer, so things are faster next time.</li>
+<li>Once the dependency resolved, Maven adds the locally downloaded artifact to your <code>CLASSPATH</code>. This means starting now, any occurence of the library reference can now be correctly resolved.</li>
 </ul>
-<p>Once the dependency is resolved, Maven adds the locally downloaded artifact to your CLASSPATH. This means starting now, any reference from code can be correctly resolved.</p>
-<p>The great thing about this procedure is: If your pom.xml evolves, all develeopers have automatically the full list of all dependencies, and the right versions - without a single mouse click in IDE menus. <strong>It just works! Reliably.</strong></p>
+<p>The great thing about this procedure is:<br />
+If your pom.xml evolves, all developers have automatically the full list of all dependencies, and the right versions - without a single mouse click in IDE menus!</p>
 <h2 id="finding-libraries">Finding Libraries</h2>
-<p>At this point you might wonder how on earth you are supposed to figure out the correct dependency entry for the library you need.<br />
-Luckily this has been made very simple for you. If e.g. you are looking for the <em>Apache Commons IO</em> library, to conveniently load files from disk you can simply:</p>
+<p>At this point you might wonder how on earth you are supposed to figure out the correct dependency entry for each and any java library you might ever need.<br />
+Luckily this part has been made very simple for you: If e.g. you are looking for the <em>Apache Commons IO</em> library, to conveniently load files from disk you can simply:</p>
 <ul>
-<li>Visit the maven central: <a href="https://mvnrepository.com/">https://mvnrepository.com/</a></li>
-<li>Search for the needed artifact: <a href="https://mvnrepository.com/artifact/commons-io/commons-io">Apache Commons IO</a></li>
+<li>Visit the maven central, a world wide collection of most public libraries: <a href="https://mvnrepository.com/">https://mvnrepository.com/</a></li>
+<li>Search for the needed artifact: Type e.g.<a href="https://mvnrepository.com/artifact/commons-io/commons-io">Apache Commons IO</a></li>
 <li>Click the version number:  Usually you want <a href="https://mvnrepository.com/artifact/commons-io/commons-io/2.11.0">the most recent one</a></li>
 <li>Copy and paste the dependency block into your <code>pom.xml</code><br />
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&lt;dependency&gt;</span>
@@ -480,6 +507,28 @@ Luckily this has been made very simple for you. If e.g. you are looking for the 
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="sample-library-use">Sample Library Use</h3>
+<p>Now that maven has conveniently placed the commons-io library on your <code>classpath</code> you can directly access it from source code.<br />
+(Don't forget to actually import the library!)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">package</span> <span class="nn">eu.kartoffelquadrat.liveprogramming</span><span class="p">;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">import</span> <span class="nn">java.io.File</span><span class="p">;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kn">import</span> <span class="nn">java.io.FileInputStream</span><span class="p">;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="kn">import</span> <span class="nn">org.apache.commons.io.IOUtils</span><span class="p">;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Launcher</span> <span class="p">{</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="p">{</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="c1">// Program prints its own code...</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">FileInputStream</span> <span class="n">fisTargetFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="k">new</span> <span class="n">File</span><span class="p">(</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="s">&quot;/Users/schieder/Desktop/LiveProgramming/src/main/java/eu/kartoffelquadrat/liveprogramming/Launcher.java&quot;</span><span class="p">));</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    <span class="n">String</span> <span class="n">targetFileStr</span> <span class="o">=</span> <span class="n">IOUtils</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">fisTargetFile</span><span class="p">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">targetFileStr</span><span class="p">);</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>  <span class="p">}</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="p">}</span>
+</code></pre></div>
 
               
             </article>

@@ -424,16 +424,15 @@
 <p>The whole point of Maven is that you can build your software reliably, no matter the environment - this also includes settings where you have no graphical access, and maybe not even an IDE.<br />
 The default way to compile a maven project is therefore by command line.</p>
 <h2 id="run-plugins-and-commands">Run Plugins and Commands</h2>
-<p>To run a program you need to point to the launcher class.<br />
-(There can also be programs with multiple launcher classes, but this corner case we deal with later.)</p>
-<p>On top, the startup procedure is often also dependent on the framework or library you are using. Especially GUI and reflective libraries tend to overload the default <code>javaagent</code> and therefore also bring their own plugin.</p>
+<p>To run a program you need to have your <code>pom.xml</code> point to the desired launcher class.<br />
+There can also be programs with multiple launcher classes, but this corner case we deal with later.</p>
+<p>On top, the startup procedure is often also dependent on the framework or library you are using. Especially GUI and reflective libraries tend to <a href="https://www.baeldung.com/java-instrumentation#:~:text=In%20general%2C%20a%20java%20agent,javaagent%20parameter%20at%20JVM%20startup">overload the default <code>javaagent</code></a> and therefore also bring their own plugins that need to be added to the <code>pom.xml</code>.</p>
 <h3 id="plugins">Plugins</h3>
 <p>Maven plugins, like <a href="dependencies/#the-classpath">dependencies</a> are (once included in the <code>pom.xml</code>) downloaded and added to the .m2 directory and classpath. However plugins are commonly compile-time dependencies, not run-time dependencies like libraries. Plugins merely target a modification of the default build and run process.</p>
-<p>In the <a href="minimalpom/#template">default <code>pomx.ml</code></a> you already see an empty<br />
+<p>In the <a href="minimalpom/#template">default <code>pom.xml</code></a> you already see an empty section for plugins:<br />
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>        <span class="nt">&lt;plugins&gt;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        <span class="nt">&lt;/plugins&gt;</span>
-</code></pre></div>
-section.</p>
+</code></pre></div></p>
 <p>All xml snippets shown in the following go directly within these tags.</p>
 <h3 id="run-plugin-samples">Run Plugin Samples</h3>
 <p>Below you find sample run-plugins for <strong>Vanilla</strong>, <strong>Spring Boot</strong> and <strong>JavaFX</strong> projects. There are many more, but this selection should give you a good illustration of the procedure.</p>

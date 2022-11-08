@@ -381,16 +381,19 @@
 
 
 <h1 id="artifact-build">Artifact Build</h1>
-<p>Often you want to run a software without first cloning the sources. In fact, when you think about it, that happens almost any time you download a software from the internet. Rarely you first want to bother with compiling the software or downloading all it's dependencies.<br />
-This is why software is commonly shipped as a bundled <em>release</em>, containing all dependencies.</p>
-<p>Maven supports a build to a wholesome <em>Java Archive</em> (JAR) file. All dependencies are then included, however the customer still needs a Java Runtime Environment (JRE).</p>
+<p>Often you want to run a software without first cloning or building the sources. In fact, almost any time you download a software from the internet you receive a precompiled release rather than source code.<br />
+It is actually not so trivial to obtain such a standalone executable that comes a single file, with all its dependencies included.</p>
+<p>Maven comes with powerful mechanisms to build your project to a wholesome <em>Java Archive</em> (JAR) file. In this case, all dependencies are included - however the customer still needs a Java Runtime Environment (JRE).</p>
+<blockquote>
+<p>Note: It is also possible to include the JRE dependencies themselves. However, for simplicity this is not covered in this guide. Additional info on true platform specific <a href="https://simonkollross.de/posts/packaging-a-java-app-for-mac-with-maven">standalones e.g. Mac can be found here</a>.</p>
+</blockquote>
 <h2 id="creating-a-jar-with-all-dependencies">Creating a JAR with all dependencies</h2>
-<p>One more this is achieved by help of plugins. Similar to the <a href="run"><em>Direct Run</em></a> module you need to provide a reference to the launcher class, so the JAR contains a meta file with instructions on where to find the "entry point".</p>
-<p>Below are snippets for <strong>Vanilla</strong>, <strong>Spring Boot</strong> and <strong>JavaFX</strong> projects. There are many more, but this selection should give you a good illustration of the procedure.</p>
-<p>In any case the procedure is the same:</p>
+<p>Once more this is a goal best achieved by help of targeted plugins. Similar to the <a href="run"><em>Direct Run</em></a> module we needed to provide a pointer to the desired launcher class, we need to tell the <em>jar-creating plugin</em> about the entry point to our code.</p>
+<p>Below are three snippets for <strong>Vanilla</strong>, <strong>Spring Boot</strong> and <strong>JavaFX</strong> projects. There are many more plugins for further frameworks, but  this selection should give you a good illustration of the procedure.</p>
 <ul>
-<li>First compile / build a self contained jar with: <code>mvn clean package</code></li>
-<li>Then run the produced jar: <code>java -jar target/whatever.jar</code></li>
+<li>Add the desired plugin to your <code>pom.xml</code></li>
+<li>Then compile / build a self contained jar with: <code>mvn clean package</code></li>
+<li>Finally run the produced jar: <code>java -jar target/whatever.jar</code></li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Vanilla / No Frameworks</label><label for="__tabbed_1_2">Spring Boot</label><label for="__tabbed_1_3">Java FX</label></div>
 <div class="tabbed-content">

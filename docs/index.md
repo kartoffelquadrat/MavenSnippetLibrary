@@ -4,8 +4,7 @@ Maven is a powerful build tool. Yet the many configuration options it offers are
 
 ## About this Page
 
-This web page hosts a step by step guide, that takes you from a minimal valid configuration to advanced features, all with **tested and proven snippets**.  
-The snippets are extracted from my own projects.
+This web page hosts a step by step guide, that takes you from a minimal valid configuration to advanced features, all with **tested and proven snippets**.
 
 ## Contributions
 

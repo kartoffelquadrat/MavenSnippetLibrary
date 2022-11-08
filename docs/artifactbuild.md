@@ -1,20 +1,21 @@
 # Artifact Build
 
-Often you want to run a software without first cloning the sources. In fact, when you think about it, that happens almost any time you download a software from the internet. Rarely you first want to bother with compiling the software or downloading all it's dependencies.  
-This is why software is commonly shipped as a bundled *release*, containing all dependencies.
+Often you want to run a software without first cloning or building the sources. In fact, almost any time you download a software from the internet you receive a precompiled release rather than source code.  
+It is actually not so trivial to obtain such a standalone executable that comes a single file, with all its dependencies included.
 
-Maven supports a build to a wholesome *Java Archive* (JAR) file. All dependencies are then included, however the customer still needs a Java Runtime Environment (JRE).
+Maven comes with powerful mechanisms to build your project to a wholesome *Java Archive* (JAR) file. In this case, all dependencies are included - however the customer still needs a Java Runtime Environment (JRE).
+
+ > Note: It is also possible to include the JRE dependencies themselves. However, for simplicity this is not covered in this guide. Additional info on true platform specific [standalones e.g. Mac can be found here](https://simonkollross.de/posts/packaging-a-java-app-for-mac-with-maven).
 
 ## Creating a JAR with all dependencies
 
-One more this is achieved by help of plugins. Similar to the [*Direct Run*](run) module you need to provide a reference to the launcher class, so the JAR contains a meta file with instructions on where to find the "entry point".
+Once more this is a goal best achieved by help of targeted plugins. Similar to the [*Direct Run*](run) module we needed to provide a pointer to the desired launcher class, we need to tell the *jar-creating plugin* about the entry point to our code.
 
-Below are snippets for **Vanilla**, **Spring Boot** and **JavaFX** projects. There are many more, but this selection should give you a good illustration of the procedure.
+Below are three snippets for **Vanilla**, **Spring Boot** and **JavaFX** projects. There are many more plugins for further frameworks, but  this selection should give you a good illustration of the procedure.
 
-In any case the procedure is the same:
-
- * First compile / build a self contained jar with: ```mvn clean package```
- * Then run the produced jar: ```java -jar target/whatever.jar```
+ * Add the desired plugin to your ```pom.xml```
+ * Then compile / build a self contained jar with: ```mvn clean package```
+ * Finally run the produced jar: ```java -jar target/whatever.jar```
 
 === "Vanilla / No Frameworks"
      ```xml
