@@ -17,7 +17,7 @@ In any case the procedure is the same:
  * Then run the produced jar: ```java -jar target/whatever.jar```
 
 === "Vanilla / No Frameworks"
-     ```
+     ```xml
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
@@ -45,7 +45,7 @@ In any case the procedure is the same:
      ```
 
 === "Spring Boot"
-     ```
+     ```xml
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -64,7 +64,7 @@ In any case the procedure is the same:
      ```
 
 === "Java FX"
-     ```
+     ```xml
 	  <plugin>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.4.0</version>
