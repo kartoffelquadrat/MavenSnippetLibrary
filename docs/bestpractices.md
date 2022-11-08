@@ -1,19 +1,23 @@
 # Build Best Practices
 
-Just because a program seemingly works, it does not mean it is free of errors or well written.
-However, while Tests, documentation and style checks are by themselves not a guarantee for good code, the are generally considered a non-optional prerequisite.
+Just because a program seemingly works, that does not mean it is free of errors or well written code.  
+Most codes agree that code gains significantly in quality, if:
+
+ * Style-Checked
+ * Documented
+ * Tested
 
 Below I show you which plugins you can integrate into your project to enforce this minimal quality on your code.
 
- > Note: Very likely your program will at first no longer run once you enable these plugins. You might be tempted to say **Nah, does not work - I'll remove this BLEEP**. However, keep in mind that you then only fix the symptoms, not the actual code issues you just were told about.  
-Better: take an hour or two, carefully read through the warnings you received, then change your code so the warnings no longer appear.
-
+ > Note: Very likely your program will at first no longer run once you enable all below plugins. It can be tempting to just remove the plugins again as a "*quick fix*". However, keep in mind that you then only turn off the flashing warning lights, not the actual quality issues with your code.
 
 ## Checkstyle
 
- * First of all you will need a [checkstyle configuration file. I recommend the one by google](assets/google_checks.xml). Place it in your project's root directory, right next to the ```pom.xml```.
+ * First of all you will need a [checkstyle configuration file. I recommend the one by google](assets/google_checks.xml). The checkstyle file is simply a restrictive linter configuration that inherently knows about all naming and indentation conventions for java code.  
+Download the ```google_checks.xml``` file and place it in your project's root directory, right next to the ```pom.xml```.
 
- * Next you need to enable the *Maven Checkstyle Plugin* in your ```pom.xml```. Paste the below snippet somewhere between your ```pom.xml```s ```<plugins>...</plugins>``` tags.
+ * Next you need to enable the *Maven Checkstyle Plugin* in your ```pom.xml```.  
+Paste the below snippet somewhere between your ```pom.xml```s ```<plugins>...</plugins>``` tags.
 
 ```xml
     <plugin>
@@ -42,13 +46,15 @@ Better: take an hour or two, carefully read through the warnings you received, t
 
 ### Effect
 
-Your program will not start unless your code complies to all checkstyle rules. This even includes formatting.  
-You really do not want to have two developers in your team who use different auto-formats and produce massive merge commits on every commit. This plugin can be a real and trouble time-saver.
+From now on, maven will invoke the checkstyle linter every single time you attempt to build or run your code.  
+Note that your program will not start unless your code complies to all checkstyle rules. This even includes formatting.  
+While this sounds tedious at first, this plugin is a guaranteed time and trouble saver - it also prevents anyone else from adding any poorly formatted or weirdly named code.
 
 
 ## JavaDoc Parameter Check
 
-Enable the *JavaDoc Plugin* in your ```pom.xml```. Paste the below snippet somewhere between your ```pom.xml```s ```<plugins>...</plugins>``` tags.
+The JavaDoc plugin does no require an extra configuration file. Simply enable the *JavaDoc Plugin* in your ```pom.xml```.  
+To do so, paste the below snippet somewhere between your ```pom.xml```s ```<plugins>...</plugins>``` tags.
 
 ```xml
     <plugin>
@@ -78,11 +84,27 @@ Enable the *JavaDoc Plugin* in your ```pom.xml```. Paste the below snippet somew
 
 ### Effect
 
-Generates to top level ```docs``` folder, using the JavaDoc in your source code.
 
-This one is very strict. The ```failOnWarnings```:```true``` entry ensures your program does not compile unless all parameters are documented. So if you forgot a single javadoc parameter documentation you cannot run your code.
+This plugin does two things:
 
-This may sound tedious, but it actually ensures your codebase does not grow and uncontrolled while getting harder and harder to understand.
+ * It first ensures **all** your methods are documented. That means unless a method ```@overrides``` a base class or interface, it must carry a javadoc description, explaining the inputs and outputs of your signature, including mention of potential exceptions.  
+Here is a little example:  
+```java
+/**
+ * Little demo method to count a given amount of sheep.
+ * @param sheep as the amount of sheep to count.
+ * @returns boolean indicating if any black sheep were encountered.
+ * @throws IOException in case a sheep jumped a fence.
+ */
+public static boolean count(int sheep) throws IOException {
+	[...]
+}
+```
+
+ * If and only if all methods are fully documented, the build process continues and the plug generates a human readable HTML Java API documentation to the ```docs``` folder. Note that you can use this output as-is, e.g. for your GitHub pages project documentation, so everyone working with your codebase has a convenient access to user navigable documentation.  
+Also, since this documentation is created on every build  or run, it automatically stays fully up to date.
+
+ > **Note:** The above plugin is set to the strictest possible configuration. Even warnings are interpreted as a direct compile failure. (```failOnWarnings```:```true```). To good side is that you can be sure your codebase never has a single undocumented method parameter.
 
 ## Unit Tests Passing
 

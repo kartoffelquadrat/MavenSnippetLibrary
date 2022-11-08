@@ -487,20 +487,26 @@
 
 
 <h1 id="build-best-practices">Build Best Practices</h1>
-<p>Just because a program seemingly works, it does not mean it is free of errors or well written.
-However, while Tests, documentation and style checks are by themselves not a guarantee for good code, the are generally considered a non-optional prerequisite.</p>
+<p>Just because a program seemingly works, that does not mean it is free of errors or well written code.<br />
+Most codes agree that code gains significantly in quality, if:</p>
+<ul>
+<li>Style-Checked</li>
+<li>Documented</li>
+<li>Tested</li>
+</ul>
 <p>Below I show you which plugins you can integrate into your project to enforce this minimal quality on your code.</p>
 <blockquote>
-<p>Note: Very likely your program will at first no longer run once you enable these plugins. You might be tempted to say <strong>Nah, does not work - I'll remove this BLEEP</strong>. However, keep in mind that you then only fix the symptoms, not the actual code issues you just were told about.<br />
-Better: take an hour or two, carefully read through the warnings you received, then change your code so the warnings no longer appear.</p>
+<p>Note: Very likely your program will at first no longer run once you enable all below plugins. It can be tempting to just remove the plugins again as a "<em>quick fix</em>". However, keep in mind that you then only turn off the flashing warning lights, not the actual quality issues with your code.</p>
 </blockquote>
 <h2 id="checkstyle">Checkstyle</h2>
 <ul>
 <li>
-<p>First of all you will need a <a href="../assets/google_checks.xml">checkstyle configuration file. I recommend the one by google</a>. Place it in your project's root directory, right next to the <code>pom.xml</code>.</p>
+<p>First of all you will need a <a href="../assets/google_checks.xml">checkstyle configuration file. I recommend the one by google</a>. The checkstyle file is simply a restrictive linter configuration that inherently knows about all naming and indentation conventions for java code.<br />
+Download the <code>google_checks.xml</code> file and place it in your project's root directory, right next to the <code>pom.xml</code>.</p>
 </li>
 <li>
-<p>Next you need to enable the <em>Maven Checkstyle Plugin</em> in your <code>pom.xml</code>. Paste the below snippet somewhere between your <code>pom.xml</code>s <code>&lt;plugins&gt;...&lt;/plugins&gt;</code> tags.</p>
+<p>Next you need to enable the <em>Maven Checkstyle Plugin</em> in your <code>pom.xml</code>.<br />
+Paste the below snippet somewhere between your <code>pom.xml</code>s <code>&lt;plugins&gt;...&lt;/plugins&gt;</code> tags.</p>
 </li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>    <span class="nt">&lt;plugin&gt;</span>
@@ -527,10 +533,12 @@ Better: take an hour or two, carefully read through the warnings you received, t
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="nt">&lt;/plugin&gt;</span>
 </code></pre></div>
 <h3 id="effect">Effect</h3>
-<p>Your program will not start unless your code complies to all checkstyle rules. This even includes formatting.<br />
-You really do not want to have two developers in your team who use different auto-formats and produce massive merge commits on every commit. This plugin can be a real and trouble time-saver.</p>
+<p>From now on, maven will invoke the checkstyle linter every single time you attempt to build or run your code.<br />
+Note that your program will not start unless your code complies to all checkstyle rules. This even includes formatting.<br />
+While this sounds tedious at first, this plugin is a guaranteed time and trouble saver - it also prevents anyone else from adding any poorly formatted or weirdly named code.</p>
 <h2 id="javadoc-parameter-check">JavaDoc Parameter Check</h2>
-<p>Enable the <em>JavaDoc Plugin</em> in your <code>pom.xml</code>. Paste the below snippet somewhere between your <code>pom.xml</code>s <code>&lt;plugins&gt;...&lt;/plugins&gt;</code> tags.</p>
+<p>The JavaDoc plugin does no require an extra configuration file. Simply enable the <em>JavaDoc Plugin</em> in your <code>pom.xml</code>.<br />
+To do so, paste the below snippet somewhere between your <code>pom.xml</code>s <code>&lt;plugins&gt;...&lt;/plugins&gt;</code> tags.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>    <span class="nt">&lt;plugin&gt;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="nt">&lt;artifactId&gt;</span>maven-javadoc-plugin<span class="nt">&lt;/artifactId&gt;</span>
@@ -556,46 +564,67 @@ You really do not want to have two developers in your team who use different aut
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="nt">&lt;/plugin&gt;</span>
 </code></pre></div>
 <h3 id="effect_1">Effect</h3>
-<p>Generates to top level <code>docs</code> folder, using the JavaDoc in your source code.</p>
-<p>This one is very strict. The <code>failOnWarnings</code>:<code>true</code> entry ensures your program does not compile unless all parameters are documented. So if you forgot a single javadoc parameter documentation you cannot run your code.</p>
-<p>This may sound tedious, but it actually ensures your codebase does not grow and uncontrolled while getting harder and harder to understand.</p>
+<p>This plugin does two things:</p>
+<ul>
+<li>
+<p>It first ensures <strong>all</strong> your methods are documented. That means unless a method <code>@overrides</code> a base class or interface, it must carry a javadoc description, explaining the inputs and outputs of your signature, including mention of potential exceptions.<br />
+Here is a little example:<br />
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cm">/**</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="cm"> * Little demo method to count a given amount of sheep.</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="cm"> * @param sheep as the amount of sheep to count.</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="cm"> * @returns boolean indicating if any black sheep were encountered.</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="cm"> * @throws IOException in case a sheep jumped a fence.</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="cm"> */</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">count</span><span class="p">(</span><span class="kt">int</span> <span class="n">sheep</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="p">{</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="o">[</span><span class="p">...</span><span class="o">]</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>If and only if all methods are fully documented, the build process continues and the plug generates a human readable HTML Java API documentation to the <code>docs</code> folder. Note that you can use this output as-is, e.g. for your GitHub pages project documentation, so everyone working with your codebase has a convenient access to user navigable documentation.<br />
+Also, since this documentation is created on every build  or run, it automatically stays fully up to date.</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> The above plugin is set to the strictest possible configuration. Even warnings are interpreted as a direct compile failure. (<code>failOnWarnings</code>:<code>true</code>). To good side is that you can be sure your codebase never has a single undocumented method parameter.</p>
+</blockquote>
 <h2 id="unit-tests-passing">Unit Tests Passing</h2>
 <p>Enforce the passing of all <em>Unit Tests</em> via your <code>pom.xml</code>. Unlike the previous, this one is enabled via a <strong>plugin</strong> in combination with a <strong>test scoped dependency</strong>. Paste the below snippet somewhere between your <code>pom.xml</code>s respective <code>&lt;dependencies&gt;...&lt;/dependencies&gt;</code> and <code>&lt;plugins&gt;...&lt;/plugins&gt;</code> tags.</p>
 <p>Dependency snippet:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>    <span class="nt">&lt;dependency&gt;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>        <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="nt">&lt;version&gt;</span>4.10<span class="nt">&lt;/version&gt;</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="nt">&lt;/dependency&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>    <span class="nt">&lt;dependency&gt;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>        <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="nt">&lt;version&gt;</span>4.10<span class="nt">&lt;/version&gt;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div></p>
 <p>Plugin snippet:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>    <span class="nt">&lt;plugin&gt;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="nt">&lt;version&gt;</span>2.22.2<span class="nt">&lt;/version&gt;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="nt">&lt;/plugin&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>    <span class="nt">&lt;plugin&gt;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="nt">&lt;version&gt;</span>2.22.2<span class="nt">&lt;/version&gt;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="nt">&lt;/plugin&gt;</span>
 </code></pre></div></p>
 <h3 id="effect_2">Effect</h3>
 <p>Refuses build unless all unit tests defines in <code>src/test/java</code> pass.</p>
 <p>Here is how to create a sample unit test:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">package</span> <span class="nn">eu.kartoffelquadrat.whatever</span><span class="p">;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="p">;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="cm">/**</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="cm"> * Simple demo test...</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="cm"> *</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="cm"> * @author Maximilian Schiedermeier</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="cm"> */</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrinterVsLoggerTest</span> <span class="p">{</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>  <span class="nd">@Test</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testPrinter</span><span class="p">()</span> <span class="p">{</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="n">AssertTrue</span><span class="p">(...);</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>  <span class="p">}</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">package</span> <span class="nn">eu.kartoffelquadrat.whatever</span><span class="p">;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="p">;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="cm">/**</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="cm"> * Simple demo test...</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="cm"> *</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="cm"> * @author Maximilian Schiedermeier</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="cm"> */</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrinterVsLoggerTest</span> <span class="p">{</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>  <span class="nd">@Test</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testPrinter</span><span class="p">()</span> <span class="p">{</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    <span class="n">AssertTrue</span><span class="p">(...);</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>  <span class="p">}</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="p">}</span>
 </code></pre></div>
 
               
