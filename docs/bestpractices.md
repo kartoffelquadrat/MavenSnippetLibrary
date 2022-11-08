@@ -1,14 +1,19 @@
 # Build Best Practices
 
-...
+Just because a program seemingly works, it does not mean it is free of errors or well written.
+However, while Tests, documentation and style checks are by themselves not a guarantee for good code, the are generally considered a non-optional prerequisite.
 
-All those are ```plugins``` / go into ```plugins``` section.
+Below I show you which plugins you can integrate into your project to enforce this minimal quality on your code.
 
-## Checkstyle without Complaints
+ > Note: Very likely your program will at first no longer run once you enable these plugins. You might be tempted to say **Nah, does not work - I'll remove this BLEEP**. However, keep in mind that you then only fix the symptoms, not the actual code issues you just were told about.  
+Better: take an hour or two, carefully read through the warnings you received, then change your code so the warnings no longer appear.
 
-Link to google checks file
 
-Code snipped:
+## Checkstyle
+
+ * First of all you will need a [checkstyle configuration file. I recommend the one by google](assets/google_checks.xml). Place it in your project's root directory, right next to the ```pom.xml```.
+
+ * Next you need to enable the *Maven Checkstyle Plugin* in your ```pom.xml```. Paste the below snippet somewhere between your ```pom.xml```s ```<plugins>...</plugins>``` tags.
 
 ```xml
     <plugin>
@@ -35,7 +40,15 @@ Code snipped:
     </plugin>
 ```
 
+### Effect
+
+Your program will not start unless your code complies to all checkstyle rules. This even includes formatting.  
+You really do not want to have two developers in your team who use different auto-formats and produce massive merge commits on every commit. This plugin can be a real and trouble time-saver.
+
+
 ## JavaDoc Parameter Check
+
+Enable the *JavaDoc Plugin* in your ```pom.xml```. Paste the below snippet somewhere between your ```pom.xml```s ```<plugins>...</plugins>``` tags.
 
 ```xml
     <plugin>
@@ -63,13 +76,19 @@ Code snipped:
     </plugin>
 ```
 
-Generates to top level ```docs``` folder.
+### Effect
 
-The ```failOnWarnings```:```true``` entry ensures your program does not compile unless all parameters are documented.
+Generates to top level ```docs``` folder, using the JavaDoc in your source code.
+
+This one is very strict. The ```failOnWarnings```:```true``` entry ensures your program does not compile unless all parameters are documented. So if you forgot a single javadoc parameter documentation you cannot run your code.
+
+This may sound tedious, but it actually ensures your codebase does not grow and uncontrolled while getting harder and harder to understand.
 
 ## Unit Tests Passing
 
-dependency:
+Enforce the passing of all *Unit Tests* via your ```pom.xml```. Unlike the previous, this one is enabled via a **plugin** in combination with a **test scoped dependency**. Paste the below snippet somewhere between your ```pom.xml```s respective ```<dependencies>...</dependencies>``` and ```<plugins>...</plugins>``` tags.
+
+Dependency snippet:
 ```xml
     <dependency>
         <groupId>junit</groupId>
@@ -79,7 +98,7 @@ dependency:
     </dependency>
 ```
 
-plugin:
+Plugin snippet:
 ```xml
     <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
@@ -88,9 +107,11 @@ plugin:
     </plugin>
 ```
 
-Refuses build anless all unit tests defines in ```src/test/java``` pass.
+### Effect
 
-Sample unit test:  
+Refuses build unless all unit tests defines in ```src/test/java``` pass.
+
+Here is how to create a sample unit test:
 
 ```java
 package eu.kartoffelquadrat.whatever;
