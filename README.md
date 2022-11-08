@@ -8,10 +8,19 @@ The Maven Snippet Library is [hosted on Github Pages](https://kartoffelquadrat.g
 
 ## Build
 
+Run this before you push to master.
+
 ```bash
 ./compile.sh
 ```
 
+## Test
+
+Run this to live deploy locally.
+
+```bash
+mkdocs serve
+```
 
 ## Contact / Pull Requests
 
