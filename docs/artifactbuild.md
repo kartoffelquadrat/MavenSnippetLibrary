@@ -32,7 +32,7 @@ In any case the procedure is the same:
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>eu.kartoffelquadrat.zoo.Launcher/mainClass>
+                            <mainClass>eu.kartoffelquadrat.zoo.Launcher</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
