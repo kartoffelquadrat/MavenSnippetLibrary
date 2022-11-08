@@ -7,7 +7,7 @@ You can use below template as starting point, although **you will need to make s
 
 Create the ```pom.xml``` at top level of your project, then paste in the below template content:
 
-```
+```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
