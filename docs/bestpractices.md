@@ -51,7 +51,7 @@ Note that your program will not start unless your code complies to all checkstyl
 While this sounds tedious at first, this plugin is a guaranteed time and trouble saver - it also prevents anyone else from adding any poorly formatted or weirdly named code.
 
 
-## JavaDoc Parameter Check
+## JavaDoc
 
 The JavaDoc plugin does no require an extra configuration file. Simply enable the *JavaDoc Plugin* in your ```pom.xml```.  
 To do so, paste the below snippet somewhere between your ```pom.xml```s ```<plugins>...</plugins>``` tags.
@@ -106,11 +106,15 @@ Also, since this documentation is created on every build  or run, it automatical
 
  > **Note:** The above plugin is set to the strictest possible configuration. Even warnings are interpreted as a direct compile failure. (```failOnWarnings```:```true```). To good side is that you can be sure your codebase never has a single undocumented method parameter.
 
-## Unit Tests Passing
+## Unit Tests
 
-Enforce the passing of all *Unit Tests* via your ```pom.xml```. Unlike the previous, this one is enabled via a **plugin** in combination with a **test scoped dependency**. Paste the below snippet somewhere between your ```pom.xml```s respective ```<dependencies>...</dependencies>``` and ```<plugins>...</plugins>``` tags.
+Unit tests should be a central part of project. It is too easy to introduce a little bug to an existing feature while working on a seemingly unrelated part of the codebase. This is why you should run your Unit tests as frequently as possible.  
+The Surfire plugin allows you just to do that! It enforces all Unit tests must run, before you can build or run your software.
 
-Dependency snippet:
+Unlike the previous plugins, this one is enabled via a **plugin snippet** in combination with a **test scoped dependency**. Paste the below snippets somewhere between your ```pom.xml```s respective ```<dependencies>...</dependencies>``` and ```<plugins>...</plugins>``` tags:
+
+### Dependency snippet
+
 ```xml
     <dependency>
         <groupId>junit</groupId>
@@ -120,7 +124,8 @@ Dependency snippet:
     </dependency>
 ```
 
-Plugin snippet:
+### Plugin snippet
+
 ```xml
     <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
@@ -131,9 +136,11 @@ Plugin snippet:
 
 ### Effect
 
-Refuses build unless all unit tests defines in ```src/test/java``` pass.
+Once added, you can be assured all tests have passed whenever you see you program run. A very assuring feeling, especially while working on missing features under the effects of an approaching deadline.
 
-Here is how to create a sample unit test:
+But don't forget to actually code good unit tests! Those belong into the ```src/test/java directory. Some developers tend to create a class with ```*Test``` suffix for every class they test, so they see a direct matching. In the end it does not really matter, as long as you reach a good coverage and check for the non-trivial scenarios.
+
+Here is a little stub of what a simple test java class may look like:
 
 ```java
 package eu.kartoffelquadrat.whatever;

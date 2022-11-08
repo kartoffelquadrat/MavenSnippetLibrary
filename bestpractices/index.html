@@ -339,11 +339,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#javadoc-parameter-check" class="md-nav__link">
-    JavaDoc Parameter Check
+  <a href="#javadoc" class="md-nav__link">
+    JavaDoc
   </a>
   
-    <nav class="md-nav" aria-label="JavaDoc Parameter Check">
+    <nav class="md-nav" aria-label="JavaDoc">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -359,12 +359,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#unit-tests-passing" class="md-nav__link">
-    Unit Tests Passing
+  <a href="#unit-tests" class="md-nav__link">
+    Unit Tests
   </a>
   
-    <nav class="md-nav" aria-label="Unit Tests Passing">
+    <nav class="md-nav" aria-label="Unit Tests">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependency-snippet" class="md-nav__link">
+    Dependency snippet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-snippet" class="md-nav__link">
+    Plugin snippet
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#effect_2" class="md-nav__link">
@@ -433,11 +447,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#javadoc-parameter-check" class="md-nav__link">
-    JavaDoc Parameter Check
+  <a href="#javadoc" class="md-nav__link">
+    JavaDoc
   </a>
   
-    <nav class="md-nav" aria-label="JavaDoc Parameter Check">
+    <nav class="md-nav" aria-label="JavaDoc">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -453,12 +467,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#unit-tests-passing" class="md-nav__link">
-    Unit Tests Passing
+  <a href="#unit-tests" class="md-nav__link">
+    Unit Tests
   </a>
   
-    <nav class="md-nav" aria-label="Unit Tests Passing">
+    <nav class="md-nav" aria-label="Unit Tests">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependency-snippet" class="md-nav__link">
+    Dependency snippet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-snippet" class="md-nav__link">
+    Plugin snippet
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#effect_2" class="md-nav__link">
@@ -536,7 +564,7 @@ Paste the below snippet somewhere between your <code>pom.xml</code>s <code>&lt;p
 <p>From now on, maven will invoke the checkstyle linter every single time you attempt to build or run your code.<br />
 Note that your program will not start unless your code complies to all checkstyle rules. This even includes formatting.<br />
 While this sounds tedious at first, this plugin is a guaranteed time and trouble saver - it also prevents anyone else from adding any poorly formatted or weirdly named code.</p>
-<h2 id="javadoc-parameter-check">JavaDoc Parameter Check</h2>
+<h2 id="javadoc">JavaDoc</h2>
 <p>The JavaDoc plugin does no require an extra configuration file. Simply enable the <em>JavaDoc Plugin</em> in your <code>pom.xml</code>.<br />
 To do so, paste the below snippet somewhere between your <code>pom.xml</code>s <code>&lt;plugins&gt;...&lt;/plugins&gt;</code> tags.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>    <span class="nt">&lt;plugin&gt;</span>
@@ -588,26 +616,29 @@ Also, since this documentation is created on every build  or run, it automatical
 <blockquote>
 <p><strong>Note:</strong> The above plugin is set to the strictest possible configuration. Even warnings are interpreted as a direct compile failure. (<code>failOnWarnings</code>:<code>true</code>). To good side is that you can be sure your codebase never has a single undocumented method parameter.</p>
 </blockquote>
-<h2 id="unit-tests-passing">Unit Tests Passing</h2>
-<p>Enforce the passing of all <em>Unit Tests</em> via your <code>pom.xml</code>. Unlike the previous, this one is enabled via a <strong>plugin</strong> in combination with a <strong>test scoped dependency</strong>. Paste the below snippet somewhere between your <code>pom.xml</code>s respective <code>&lt;dependencies&gt;...&lt;/dependencies&gt;</code> and <code>&lt;plugins&gt;...&lt;/plugins&gt;</code> tags.</p>
-<p>Dependency snippet:
+<h2 id="unit-tests">Unit Tests</h2>
+<p>Unit tests should be a central part of project. It is too easy to introduce a little bug to an existing feature while working on a seemingly unrelated part of the codebase. This is why you should run your Unit tests as frequently as possible.<br />
+The Surfire plugin allows you just to do that! It enforces all Unit tests must run, before you can build or run your software.</p>
+<p>Unlike the previous plugins, this one is enabled via a <strong>plugin snippet</strong> in combination with a <strong>test scoped dependency</strong>. Paste the below snippets somewhere between your <code>pom.xml</code>s respective <code>&lt;dependencies&gt;...&lt;/dependencies&gt;</code> and <code>&lt;plugins&gt;...&lt;/plugins&gt;</code> tags:</p>
+<h3 id="dependency-snippet">Dependency snippet</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>    <span class="nt">&lt;dependency&gt;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>        <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="nt">&lt;version&gt;</span>4.10<span class="nt">&lt;/version&gt;</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div></p>
-<p>Plugin snippet:
+</code></pre></div>
+<h3 id="plugin-snippet">Plugin snippet</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>    <span class="nt">&lt;plugin&gt;</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="nt">&lt;version&gt;</span>2.22.2<span class="nt">&lt;/version&gt;</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="nt">&lt;/plugin&gt;</span>
-</code></pre></div></p>
+</code></pre></div>
 <h3 id="effect_2">Effect</h3>
-<p>Refuses build unless all unit tests defines in <code>src/test/java</code> pass.</p>
-<p>Here is how to create a sample unit test:</p>
+<p>Once added, you can be assured all tests have passed whenever you see you program run. A very assuring feeling, especially while working on missing features under the effects of an approaching deadline.</p>
+<p>But don't forget to actually code good unit tests! Those belong into the <code>src/test/java directory. Some developers tend to create a class with</code>*Test``` suffix for every class they test, so they see a direct matching. In the end it does not really matter, as long as you reach a good coverage and check for the non-trivial scenarios.</p>
+<p>Here is a little stub of what a simple test java class may look like:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">package</span> <span class="nn">eu.kartoffelquadrat.whatever</span><span class="p">;</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="p">;</span>
