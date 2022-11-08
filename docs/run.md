@@ -1,7 +1,7 @@
 # Run
 
 The whole point of Maven is that you can build your software reliably, no matter the environment - this also includes settings where you have no graphical access, and maybe not even an IDE.  
-The default way to compilie is therefore by command line.
+The default way to compile is therefore by command line.
 
 ## Run Plugins and Commands
 

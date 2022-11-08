@@ -8,7 +8,7 @@ This web page hosts a step by step guide, that takes you from a minimal valid co
 
 ## Contributions
 
-Feel free to report errors or improvement suggestions via merge requests to https://github.com/kartoffelqudrat/MavenSnippetLibrary.
+Feel free to report errors or improvement suggestions via merge requests to [https://github.com/kartoffelqudrat/MavenSnippetLibrary](https://github.com/kartoffelqudrat/MavenSnippetLibrary).
 
 Most of all have lots of fun and happy coding,  
 [Max](https://www.cs.mcgill.ca/~mschie3/)

@@ -16,11 +16,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://www.cs.mcgill.ca/MavenSnippetLibrary/buildtojar/</loc>
-         <lastmod>2022-11-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://www.cs.mcgill.ca/MavenSnippetLibrary/dependencies/</loc>
          <lastmod>2022-11-08</lastmod>
          <changefreq>daily</changefreq>
