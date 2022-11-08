@@ -1,9 +1,11 @@
-# Miminal Pom
+# Minimal Pom
 
-Once you have decided on your ```groupId```, ```artifactId``` and set up the required folder structure, the next step is to create a minimal ```pom.xml```.  
-You can use below template as starting point, although you will need to make some minor changes.
+Once you have decided on your ```groupId```, ```artifactId``` and also set up the required folder structure, the next step is to create a minimal ```pom.xml``` file.  
+You can use below template as starting point, although **you will need to make some minor changes**.
 
 ## Template
+
+Create the ```pom.xml``` at top level of your project, then paste in the below template content:
 
 ```
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -59,6 +61,8 @@ You can use below template as starting point, although you will need to make som
 ```
 
 ## Changes
+
+Next go over below list and make sure to updated the indicated fields:
 
  * Replace the ```groupId``` tag content by something that [describes your group](layout/#groupid-artifactid-packages).
  * Replace the ```artifactId``` tag content by something that [describes your project purpose](layout/#groupid-artifactid-packages).

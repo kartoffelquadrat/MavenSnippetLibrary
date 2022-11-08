@@ -435,13 +435,19 @@
 
 
 <h1 id="compile-time-dependencies">Compile Time Dependencies</h1>
-<p>Most programmers at first are puzzled by the complexity of library integration. The habit of dragging needed libraries at random points graphically into your IDE unfortunately conceals the actual complexity of code dependencies.  </p>
+<p>Most programmers at first are puzzled by the complexity of library integration. The habit of graphically dragging libraries at random points into your IDE unfortunately conceals the actual complexity of code dependencies.</p>
 <h2 id="motivation">Motivation</h2>
-<p>While the drag and drop approach might work for a single developer, it is not a reliable approach for fast workstation setup or even scenarios where not graphical access to the code exists (compiling on a server via SSH).</p>
+<p>While the drag and drop approach might work for a single developer and a simple project, it is not a reliable approach for fast workstation setup or even scenarios where not graphical access to the code exists (compiling on a server via SSH).</p>
 <h3 id="the-classpath">The Classpath</h3>
-<p>What actually happens when you try to compile a piece of software that calls a library is that the java compiler sets out for journey to localize the library you are referring to. Unfortunately just writing the import statement, or calling a library is insufficient. What the compiler actually needs is a classpath reference. (The classpath is a bit like the PATH variable on your operating system. It indexes all the software installed, only in this case specifically for java libraries)</p>
-<p>In principle you could manually download all libraries your project needs and manually alter the classpath every time you compile or run your software. When you drag and drop a library jar file on your IDE that actually happens implicitly.</p>
+<p>What actually happens when you try to compile a piece of software (depending on a library call) is that the java compiler sets out for journey to localize the library you are referring to.  Unfortunately by just writing the import statement, or calling a library the compiler has no clue where to actually find the library byte code. What the compiler actually needs is a <code>classpath</code> reference, pin pointing exactly to the location on disk. (The <code>classpath</code> is a bit like the <code>PATH</code> variable on your operating system. It indexes all the software installed, only in this case specifically for java libraries)</p>
+<ul>
+<li>
+<p>In principle you could manually download all libraries your project needs and manually alter the <code>classpath</code> every time you compile or run your software. When you drag and drop a library jar file on your IDE that actually happens implicitly.</p>
+</li>
+<li>
 <p>The problem is that this only solves the issue for the very machine you are working on, not for any other developer who clones your project.</p>
+</li>
+</ul>
 <p>This is once more where maven comes to rescue. Maven has a dedicated part in the <code>pom.xml</code> file to indicate all dependencies textually. Since the <code>pom.xml</code> resides alongside the sources of your project, everyone who want to work with your project automatically gets all it's dependencies, store between the <code>&lt;dependencies&gt;...&lt;/dependencies&gt;</code> tags.</p>
 <h3 id="mavens-dependency-model">Mavens Dependency Model</h3>
 <p>The Maven <code>pom.xml</code> only stores a unique description of your dependencies, not the referenced libraries themselves. Luckily! Otherwise your repository would rapidly exceed a tolerable size.</p>

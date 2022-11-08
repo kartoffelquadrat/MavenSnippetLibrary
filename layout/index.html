@@ -395,19 +395,20 @@
 
 
 <h1 id="project-layout">Project Layout</h1>
-<p>You might be used from other programming languages or simpler projects to just throw in you code files at random place and click a green triangle start button in your IDE without much trouble.</p>
-<p>While this may work for some toy examples or little scripting tools, hacked in a day, bigger software projects often have a long list of requirements and likewise are expected to compile and run reliable no matter to platform or developer cloning the project.</p>
-<p>This is where maven enters the game. Maven replaces drag and click based project configuration where a developer sets up their project via IDE menus, by a central xml textual description, the <code>`pom.xml</code>.</p>
+<p>You might be used to a discovery like project setup, where you just throw in you code files at random place into the project, then hopefully click a green triangle start button in your IDE and cross you fingers it will magically work.</p>
+<p>While this may work for tiny projects or little scripting codebases that you hammer out in a day, bigger software projects often have a long list of requirements and likewise are expected to compile and run reliable no matter to platform or developer cloning the project.</p>
+<p>This is where maven enters the game. Maven replaces the click based project configuration (where a developer sets up their project via IDE menus), by a central xml textual description, the <code>`pom.xml</code>.</p>
+<p>The good news is: Once the <code>pom.xml</code> is set up, no one ever needs to touch a UI menu again.</p>
 <h2 id="files-and-folders">Files and Folders</h2>
 <p>The root of a maven project should roughly look like this:
 <img alt="folderlayout" src="../captures/folderlayout.png" /></p>
-<p>Before we go into the details, not that there are two important entires at root level:</p>
+<p>Before we go into the details, note that there are two important entires at root level:</p>
 <ul>
 <li><code>pom.xml</code> which contains all project configuration. Almost everything presented on this webpage are snippets that extend this file.</li>
 <li>A <code>src</code> folder, all your source code, tests, even resources go somewhere into that folder.</li>
 </ul>
-<p>Depending on which configurations you add to your <code>pom.xml</code> you might have addition content on top level. But for a start these are the minimum requirement for your project at root level.</p>
-<p>Next let's look at the content of the <code>src</code> folder. Everything that carries a red marker in the capture above must be in place, exactly as shown for your project to be valid.</p>
+<p>Depending on which configurations you add to your <code>pom.xml</code>, you might have additional content on top level. But for a start these are the minimum requirement for your project at root level.</p>
+<p>Next let's look at the nested content of the <code>src</code> folder. Everything that carries a red marker in the capture above must be in place <strong>exactly as shown</strong>. If you alter that structure, your project simply is not valid and there are zero guarantees for what happens when someone else attempts to build build and run it.</p>
 <ul>
 <li>Your java sources go into <code>src/main/java</code></li>
 <li>Your java tests fo into <code>src/test/java</code></li>
@@ -416,10 +417,12 @@
 <h2 id="groupid-artifactid-packages">GroupId, ArtifactId, Packages</h2>
 <p>In the <code>test/java</code> and <code>src/java</code> folder you see subfolders: <code>eu/kartoffelquadrat/printer</code>.</p>
 <ul>
-<li><code>eu/kartoffelquadrat</code> has a green label. This on represents your <code>groupId</code>. The <code>groupId</code> is specific to the developer or team of developers responsible for the project. By convention it is the inverted domain name of your affiliation. So for instance if you are a student at McGill you could use: <code>ca/mcgill</code> instead of <code>eu/kartoffelquadrat</code>.<br />
-<strong>Do not use <code>eu/kartoffelquadrat</code> for your projects.</strong> That domain is owned by me, so you better not pretend to release software on my behalf. ;)</li>
-<li><code>printer</code> is the <code>artifactId</code>. It describes the specific purpose of your project. For instance if you are developing a board game tic tac toe client, it could be <code>ticTacToeClient</code>.</li>
-<li>Optionally you can create further subfolders for packages. E.g. if you have an MVC structure you can place parallel folders for <code>model</code>, <code>view</code>, <code>control</code> under your <code>artifactId</code>. This is optional. </li>
+<li><code>eu/kartoffelquadrat</code> has a green label. This on represents your <code>groupId</code>. The <code>groupId</code> is specific to the developer (or team of developers) responsible for the project. By convention it is the inverted domain name of your affiliation. So for instance if you are a student at McGill you could use: <code>ca/mcgill</code> instead of <code>eu/kartoffelquadrat</code>. It can also be longer than two segments, but it seems to have become an unwritten convention to use two segments.  <blockquote>
+<p><strong>Do not use <code>eu/kartoffelquadrat</code> for your projects.</strong> That domain is owned by me, so you better not pretend to release software on my behalf. ;)</p>
+</blockquote>
+</li>
+<li><code>printer</code> is the <code>artifactId</code>. It describes the specific purpose of your project. For instance if you are developing a board game <em>tic tac toe</em> client, it could be <code>ticTacToeClient</code>.</li>
+<li>Optionally you can create further subfolders for packages. E.g. if you have an MVC structure you can place parallel folders for <code>model</code>, <code>view</code>, <code>control</code> under your <code>artifactId</code>. Packages are optional for smaller projects, but for everything that has more than 5 classes, things can get very confusing without packages.</li>
 </ul>
 
               

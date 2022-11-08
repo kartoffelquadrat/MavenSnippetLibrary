@@ -1,18 +1,18 @@
 # Run
 
 The whole point of Maven is that you can build your software reliably, no matter the environment - this also includes settings where you have no graphical access, and maybe not even an IDE.  
-The default way to compile is therefore by command line.
+The default way to compile a maven project is therefore by command line.
 
 ## Run Plugins and Commands
 
-To run a program you mainly need to point to the launcher class.  
+To run a program you need to point to the launcher class.  
 (There can also be programs with multiple launcher classes, but this corner case we deal with later.)
 
-On top, the startup procedure is often also dependent on the framework or library you are using. Especially GUI and reflective libraries often overload the default javaagent and therefore bring their proper plugin.
+On top, the startup procedure is often also dependent on the framework or library you are using. Especially GUI and reflective libraries tend to overload the default ```javaagent``` and therefore also bring their own plugin.
 
 ### Plugins
 
-Maven plugins, like [dependencies](dependencies/#the-classpath) are (once included in the ```pom.xml```) downloaded and added to the classpath. However plugins are commonly compile-time, not run-time dependencies, and merely target a modification of the default build and run process.
+Maven plugins, like [dependencies](dependencies/#the-classpath) are (once included in the ```pom.xml```) downloaded and added to the .m2 directory and classpath. However plugins are commonly compile-time dependencies, not run-time dependencies like libraries. Plugins merely target a modification of the default build and run process.
 
 In the [default ```pomx.ml```](minimalpom/#template) you already see an empty  
 ```xml
@@ -21,7 +21,7 @@ In the [default ```pomx.ml```](minimalpom/#template) you already see an empty
 ```
 section.
 
-All xml snippets show in the following go directly between these tags.
+All xml snippets shown in the following go directly within these tags.
 
 ### Run Plugin Samples
 
@@ -47,13 +47,13 @@ Below you find sample run-plugins for **Vanilla**, **Spring Boot** and **JavaFX*
                 </configuration>
      </plugin>
      ```
-     Start with: ```mvn clean package exec:java```
+     Start your program with: ```mvn clean package exec:java```
 
 === "Spring Boot"
      ```
      ---No Plugins Needed: Launcher class is auto detected by annotation---
      ```
-     Start with: ```mvn clean package spring-boot:run```
+      Start your program with: ```mvn clean package spring-boot:run```
 
 === "Java FX"
      ```
@@ -66,4 +66,4 @@ Below you find sample run-plugins for **Vanilla**, **Spring Boot** and **JavaFX*
                 </configuration>
      </plugin>
      ```
-     Start with: ```mvn clean package javafx:run```
+      Start your program with: ```mvn clean package javafx:run```

@@ -422,19 +422,19 @@
 
 <h1 id="run">Run</h1>
 <p>The whole point of Maven is that you can build your software reliably, no matter the environment - this also includes settings where you have no graphical access, and maybe not even an IDE.<br />
-The default way to compile is therefore by command line.</p>
+The default way to compile a maven project is therefore by command line.</p>
 <h2 id="run-plugins-and-commands">Run Plugins and Commands</h2>
-<p>To run a program you mainly need to point to the launcher class.<br />
+<p>To run a program you need to point to the launcher class.<br />
 (There can also be programs with multiple launcher classes, but this corner case we deal with later.)</p>
-<p>On top, the startup procedure is often also dependent on the framework or library you are using. Especially GUI and reflective libraries often overload the default javaagent and therefore bring their proper plugin.</p>
+<p>On top, the startup procedure is often also dependent on the framework or library you are using. Especially GUI and reflective libraries tend to overload the default <code>javaagent</code> and therefore also bring their own plugin.</p>
 <h3 id="plugins">Plugins</h3>
-<p>Maven plugins, like <a href="dependencies/#the-classpath">dependencies</a> are (once included in the <code>pom.xml</code>) downloaded and added to the classpath. However plugins are commonly compile-time, not run-time dependencies, and merely target a modification of the default build and run process.</p>
+<p>Maven plugins, like <a href="dependencies/#the-classpath">dependencies</a> are (once included in the <code>pom.xml</code>) downloaded and added to the .m2 directory and classpath. However plugins are commonly compile-time dependencies, not run-time dependencies like libraries. Plugins merely target a modification of the default build and run process.</p>
 <p>In the <a href="minimalpom/#template">default <code>pomx.ml</code></a> you already see an empty<br />
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>        <span class="nt">&lt;plugins&gt;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        <span class="nt">&lt;/plugins&gt;</span>
 </code></pre></div>
 section.</p>
-<p>All xml snippets show in the following go directly between these tags.</p>
+<p>All xml snippets shown in the following go directly within these tags.</p>
 <h3 id="run-plugin-samples">Run Plugin Samples</h3>
 <p>Below you find sample run-plugins for <strong>Vanilla</strong>, <strong>Spring Boot</strong> and <strong>JavaFX</strong> projects. There are many more, but this selection should give you a good illustration of the procedure.</p>
 <blockquote>
@@ -459,12 +459,12 @@ section.</p>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>           &lt;/configuration&gt;
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>&lt;/plugin&gt;
 </code></pre></div>
- Start with: <code>mvn clean package exec:java</code></p>
+ Start your program with: <code>mvn clean package exec:java</code></p>
 </div>
 <div class="tabbed-block">
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>---No Plugins Needed: Launcher class is auto detected by annotation---
 </code></pre></div>
- Start with: <code>mvn clean package spring-boot:run</code></p>
+  Start your program with: <code>mvn clean package spring-boot:run</code></p>
 </div>
 <div class="tabbed-block">
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&lt;plugin&gt;
@@ -476,7 +476,7 @@ section.</p>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>           &lt;/configuration&gt;
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>&lt;/plugin&gt;
 </code></pre></div>
- Start with: <code>mvn clean package javafx:run</code></p>
+  Start your program with: <code>mvn clean package javafx:run</code></p>
 </div>
 </div>
 </div>
