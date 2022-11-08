@@ -1,5 +1,5 @@
 site_name: Maven Snippet Library
-site_url: https://www.cs.mcgill.ca/MavenSnippetLibrary
+site_url: https://www.cs.mcgill.ca/~mschie3/
 nav:
     - Welcome: index.md
     - Maven Project Layout: layout.md

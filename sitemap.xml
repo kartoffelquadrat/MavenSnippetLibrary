@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://www.cs.mcgill.ca/MavenSnippetLibrary/</loc>
+         <loc>https://www.cs.mcgill.ca/~mschie3/</loc>
          <lastmod>2022-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://www.cs.mcgill.ca/MavenSnippetLibrary/artifactbuild/</loc>
+         <loc>https://www.cs.mcgill.ca/~mschie3/artifactbuild/</loc>
          <lastmod>2022-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://www.cs.mcgill.ca/MavenSnippetLibrary/bestpractices/</loc>
+         <loc>https://www.cs.mcgill.ca/~mschie3/bestpractices/</loc>
          <lastmod>2022-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://www.cs.mcgill.ca/MavenSnippetLibrary/dependencies/</loc>
+         <loc>https://www.cs.mcgill.ca/~mschie3/dependencies/</loc>
          <lastmod>2022-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://www.cs.mcgill.ca/MavenSnippetLibrary/ideintegration/</loc>
+         <loc>https://www.cs.mcgill.ca/~mschie3/ideintegration/</loc>
          <lastmod>2022-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://www.cs.mcgill.ca/MavenSnippetLibrary/layout/</loc>
+         <loc>https://www.cs.mcgill.ca/~mschie3/layout/</loc>
          <lastmod>2022-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://www.cs.mcgill.ca/MavenSnippetLibrary/minimalpom/</loc>
+         <loc>https://www.cs.mcgill.ca/~mschie3/minimalpom/</loc>
          <lastmod>2022-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://www.cs.mcgill.ca/MavenSnippetLibrary/profiles/</loc>
+         <loc>https://www.cs.mcgill.ca/~mschie3/profiles/</loc>
          <lastmod>2022-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://www.cs.mcgill.ca/MavenSnippetLibrary/run/</loc>
+         <loc>https://www.cs.mcgill.ca/~mschie3/run/</loc>
          <lastmod>2022-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://www.cs.mcgill.ca/MavenSnippetLibrary/signature/</loc>
+         <loc>https://www.cs.mcgill.ca/~mschie3/signature/</loc>
          <lastmod>2022-11-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
