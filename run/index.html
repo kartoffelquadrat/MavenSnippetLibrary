@@ -249,10 +249,76 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Direct Run
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Direct Run
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#run-plugins-and-commands" class="md-nav__link">
+    Run Plugins and Commands
+  </a>
+  
+    <nav class="md-nav" aria-label="Run Plugins and Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugins" class="md-nav__link">
+    Plugins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-plugin-samples" class="md-nav__link">
+    Run Plugin Samples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../artifactbuild/" class="md-nav__link">
+        Artifact Build
+      </a>
     </li>
   
 
@@ -307,6 +373,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#run-plugins-and-commands" class="md-nav__link">
+    Run Plugins and Commands
+  </a>
+  
+    <nav class="md-nav" aria-label="Run Plugins and Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugins" class="md-nav__link">
+    Plugins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-plugin-samples" class="md-nav__link">
+    Run Plugin Samples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -320,42 +421,60 @@
 
 
 <h1 id="run">Run</h1>
-<p>This one depends on the frameworks you are using:</p>
+<p>The whole point of Maven is that you can build your software reliably, no matter the environment - this also includes settings where you have no graphical access, and maybe not even an IDE.<br />
+The default way to compilie is therefore by command line.</p>
+<h2 id="run-plugins-and-commands">Run Plugins and Commands</h2>
+<p>To run a program you mainly need to point to the launcher class.<br />
+(There can also be programs with multiple launcher classes, but this corner case we deal with later.)</p>
+<p>On top, the startup procedure is often also dependent on the framework or library you are using. Especially GUI and reflective libraries often overload the default javaagent and therefore bring their proper plugin.</p>
+<h3 id="plugins">Plugins</h3>
+<p>Maven plugins, like <a href="dependencies/#the-classpath">dependencies</a> are (once included in the <code>pom.xml</code>) downloaded and added to the classpath. However plugins are commonly compile-time, not run-time dependencies, and merely target a modification of the default build and run process.</p>
+<p>In the <a href="minimalpom/#template">default <code>pomx.ml</code></a> you already see an empty<br />
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>        <span class="nt">&lt;plugins&gt;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        <span class="nt">&lt;/plugins&gt;</span>
+</code></pre></div>
+section.</p>
+<p>All xml snippets show in the following go directly between these tags.</p>
+<h3 id="run-plugin-samples">Run Plugin Samples</h3>
+<p>Below you find sample run-plugins for <strong>Vanilla</strong>, <strong>Spring Boot</strong> and <strong>JavaFX</strong> projects. There are many more, but this selection should give you a good illustration of the procedure.</p>
+<blockquote>
+<p>Note how every plugin also slightly alters the launch command! (Command after xml snippet)</p>
+</blockquote>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Vanilla / No Frameworks</label><label for="__tabbed_1_2">Spring Boot</label><label for="__tabbed_1_3">Java FX</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&lt;plugin&gt;
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>           &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>           &lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>           &lt;version&gt;1.6.0&lt;/version&gt;
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>           &lt;executions&gt;
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>               &lt;execution&gt;
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                   &lt;goals&gt;
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                       &lt;goal&gt;java&lt;/goal&gt;
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                   &lt;/goals&gt;
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>               &lt;/execution&gt;
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>           &lt;/executions&gt;
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>           &lt;configuration&gt;
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>               &lt;mainClass&gt;eu.kartoffelquadrat.printer.PrinterVsLogger&lt;/mainClass&gt;
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>           &lt;/configuration&gt;
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>&lt;/plugin&gt;
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&lt;plugin&gt;
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>           &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>           &lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>           &lt;version&gt;1.6.0&lt;/version&gt;
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>           &lt;executions&gt;
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>               &lt;execution&gt;
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>                   &lt;goals&gt;
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>                       &lt;goal&gt;java&lt;/goal&gt;
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>                   &lt;/goals&gt;
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>               &lt;/execution&gt;
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>           &lt;/executions&gt;
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>           &lt;configuration&gt;
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>               &lt;mainClass&gt;eu.kartoffelquadrat.printer.PrinterVsLogger&lt;/mainClass&gt;
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>           &lt;/configuration&gt;
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>&lt;/plugin&gt;
 </code></pre></div>
  Start with: <code>mvn clean package exec:java</code></p>
 </div>
 <div class="tabbed-block">
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>---No Plugins Needed---
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>---No Plugins Needed: Launcher class is auto detected by annotation---
 </code></pre></div>
  Start with: <code>mvn clean package spring-boot:run</code></p>
 </div>
 <div class="tabbed-block">
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&lt;plugin&gt;
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>           &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>           &lt;artifactId&gt;javafx-maven-plugin&lt;/artifactId&gt;
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>           &lt;version&gt;0.0.8&lt;/version&gt;
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>           &lt;configuration&gt;
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>               &lt;mainClass&gt;eu.kartoffelquadrat.javafxhelloworld.Launcher&lt;/mainClass&gt;
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>           &lt;/configuration&gt;
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>&lt;/plugin&gt;
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&lt;plugin&gt;
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>           &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>           &lt;artifactId&gt;javafx-maven-plugin&lt;/artifactId&gt;
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>           &lt;version&gt;0.0.8&lt;/version&gt;
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>           &lt;configuration&gt;
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>               &lt;mainClass&gt;eu.kartoffelquadrat.javafxhelloworld.Launcher&lt;/mainClass&gt;
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>           &lt;/configuration&gt;
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>&lt;/plugin&gt;
 </code></pre></div>
  Start with: <code>mvn clean package javafx:run</code></p>
 </div>
@@ -390,13 +509,13 @@
       
       
         
-        <a href="../ideintegration/" class="md-footer__link md-footer__link--next" aria-label="Next: IDE Integration" rel="next">
+        <a href="../artifactbuild/" class="md-footer__link md-footer__link--next" aria-label="Next: Artifact Build" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              IDE Integration
+              Artifact Build
             </div>
           </div>
           <div class="md-footer__button md-icon">

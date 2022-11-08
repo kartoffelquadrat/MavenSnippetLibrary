@@ -6,6 +6,7 @@ nav:
     - Minimal Pom: minimalpom.md
     - Dependency Management: dependencies.md
     - Direct Run: run.md
+    - Artifact Build: artifactbuild.md
     - IDE Integration: ideintegration.md
     - Best Practices: bestpractices.md
 theme:
