@@ -9,7 +9,7 @@ The snippets are extracted from my own projects.
 
 ## Contributions
 
-Feel free to report errors or improvement suggestions via merge requests to [https://github.com/kartoffelqudrat/MavenSnippetLibrary](https://github.com/kartoffelqudrat/MavenSnippetLibrary).
+Feel free to report errors or improvement suggestions via merge requests to [https://github.com/kartoffelqudrat/MavenSnippetLibrary](https://github.com/kartoffelquadrat/MavenSnippetLibrary).
 
 Note that you need [mkdocs](https://squidfunk.github.io/mkdocs-material/) to build the webpage. So make sure to edit the markdowns, not the HTMLS.
 
