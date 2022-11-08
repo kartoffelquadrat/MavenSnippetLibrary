@@ -279,9 +279,61 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          IDE Integration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         IDE Integration
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#open-the-right-folder" class="md-nav__link">
+    Open the right Folder
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#link-the-pom-file" class="md-nav__link">
+    Link the pom File
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-a-run-configuration" class="md-nav__link">
+    Set up a Run Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshoot" class="md-nav__link">
+    Troubleshoot
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -322,6 +374,42 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#open-the-right-folder" class="md-nav__link">
+    Open the right Folder
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#link-the-pom-file" class="md-nav__link">
+    Link the pom File
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-a-run-configuration" class="md-nav__link">
+    Set up a Run Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshoot" class="md-nav__link">
+    Troubleshoot
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -335,7 +423,52 @@
 
 
 <h1 id="ide-integration">IDE Integration</h1>
-<p>Coming soon!</p>
+<p>In this module I show you how to correctly set up a maven project in <a href="https://www.jetbrains.com/idea/download/">IntelliJ IDEA</a>.<br />
+While IntelliJ supports Maven projects out of the box, however there are a few pitfalls.</p>
+<h2 id="open-the-right-folder">Open the right Folder</h2>
+<p>There are different ways to open a project, but the most reliable in my experience is to use the <code>Open</code> dialogue:</p>
+<p><img alt="open" src="../captures/intellij/open.png" /></p>
+<p>Next select <strong>the root folder of your maven project</strong>! Not <code>src</code> not any inner nested folder, select the <code>root</code> folder. That is <strong>the folder containing your <code>pom.xml</code></strong>.</p>
+<p><img alt="folder" src="../captures/intellij/folder.png" /></p>
+<p>Give IntelliJ a moment to index your project, there is a little progress bar in the top right. Then you should be good to continue.</p>
+<h2 id="link-the-pom-file">Link the pom File</h2>
+<p>The changes made to the <code>pom.xml</code> file might not be all be taken into account out of the box. If you see this popup in the top right corner, click the twirly arrows to keep your IDE in sync with the content of your <code>pom.xml</code> file.</p>
+<p><img alt="twirl" src="../captures/intellij/twirl.png" /></p>
+<h2 id="set-up-a-run-configuration">Set up a Run Configuration</h2>
+<p>When you open a class with a <code>main</code> method, IntelliJ will display little green triangles on the side bar. <strong>DO NOT CLICK THOSE!</strong></p>
+<p><img alt="nein" src="../captures/intellij/nein.png" /></p>
+<p>If you do, IntelliJ will interpret and run your code, but it will do so without taking into account any of your maven plugin configurations. This is not what you want, you might as well not use Maven then.</p>
+<p>Instead set up your own Maven-based run configuration:</p>
+<ul>
+<li>Click the <code>Edit Configuration...</code> button in the top right.<br />
+<img alt="editconfig" src="../captures/intellij/editconfig.png" /></li>
+<li>Add a <em>Maven Configuration</em>, use the desired run command, e.g. <code>clean package exec:java</code>.<br />
+Note the <code>mvn</code> keyword is implicit here.<br />
+<img alt="mavenconfig" src="../captures/intellij/mavenconfig.png" /></li>
+</ul>
+<blockquote>
+<p>From here on the green triangle <strong>next to your custom run configuration</strong> automatically triggers the desired maven goals.</p>
+</blockquote>
+<h2 id="troubleshoot">Troubleshoot</h2>
+<ul>
+<li><strong>Q</strong>: I open the project with IntelliJ, but everything is underlined in red.<br />
+<strong>A</strong>: The projet was not correctly opened. There are multiple potential fixes:<br />
+    Option 1) Reload <code>pom.xml</code>: Right click the file, then select <code>Maven -&gt; Reload Project</code>.<br />
+<img alt="reload" src="../captures/intellij/reloadmaven.png" />
+    Option 2) Verify the JDK version: Select <code>File</code> -&gt; <code>Project Structure...</code>. Verify <code>11.0.5</code> is selected in the <em>Project</em> and <em>SDKs</em> tab:<br />
+<img alt="sdk1" src="../captures/intellij/sdk1.png" /><br />
+<img alt="sdk2" src="../captures/intellij/sdk2.png" /><br />
+    Option 3) Invalidate IntelliJ caches: Select <code>File</code> -&gt; <code>Invalidate Caches...</code>. Then select the first two checkboxes:<br />
+<img alt="invalidate1" src="../captures/intellij/invalidate1.png" /><br />
+<img alt="invalidate2" src="../captures/intellij/invalidate2.png" /></li>
+<li><strong>Q</strong>: I cannot compile / run the project, the green button is greyed out.<br />
+<strong>A</strong>: The project has no launch configuration by default, therefore the arrow in the top bar is not available. You have to create a maven run configuration first.</li>
+<li><strong>Q</strong>: I've modified the <code>pom.xml</code> file as shown, but IntelliJ still does not seem to know about any dependencies.<br />
+<strong>A</strong>: Sometimes the changes made to the <code>pom.xml</code> are not automatically detected. (See first question, <code>pom.xml</code>reload```.)</li>
+<li><strong>Q</strong>: IntelliJ asks me whether I want to trust the project sources. Should I?<br />
+<strong>A</strong>: Yes. This is just a security mechanism to prevent malicious code being executed on project import. The provided sources are all from us and can be trusted.<br />
+<img alt="trust" src="../captures/intellij/trust.png" /></li>
+</ul>
 
               
             </article>
