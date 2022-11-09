@@ -441,7 +441,11 @@
 <a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="nt">&lt;/executions&gt;</span>
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="nt">&lt;/plugin&gt;</span>
 </code></pre></div>
-<p>The plugin in configured to be automcatically executed on every <code>mvn clean package</code>. To run the code analysis without the full <code>package</code> phase, type: <code>mvn clean pmd:check</code>.</p>
+<p>Invokation:</p>
+<ul>
+<li>The plugin is configured to be automcatically executed on every <code>mvn clean package</code>.</li>
+<li>To run the code analysis without the full <code>package</code> phase, type: <code>mvn clean pmd:check</code>.</li>
+</ul>
 <h2 id="tweaks">Tweaks</h2>
 <p>Above default configuration only tests for codestyle violations. To get the full range of feedback, enable the full <code>rulesets</code> list:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>    <span class="nt">&lt;ruleset&gt;</span>/category/java/bestpractices.xml<span class="nt">&lt;/ruleset&gt;</span>

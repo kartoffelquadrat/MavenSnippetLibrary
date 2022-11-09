@@ -37,7 +37,10 @@ Add the following plugin to your ```pom.xml```:
 </plugin>
 ```
 
-The plugin in configured to be automcatically executed on every ```mvn clean package```. To run the code analysis without the full ```package``` phase, type: ```mvn clean pmd:check```.
+Invokation:
+
+ * The plugin is configured to be automcatically executed on every ```mvn clean package```.
+ * To run the code analysis without the full ```package``` phase, type: ```mvn clean pmd:check```.
 
 ## Tweaks
 
