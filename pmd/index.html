@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://www.cs.mcgill.ca/~mschie3/layout/">
+        <link rel="canonical" href="https://www.cs.mcgill.ca/~mschie3/pmd/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.5">
     
     
       
-        <title>Maven Project Layout - Maven Snippet Library</title>
+        <title>Project Meets Deadline - Maven Snippet Library</title>
       
     
     
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#project-layout" class="md-skip">
+        <a href="#pmd" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Maven Project Layout
+              Project Meets Deadline
             
           </span>
         </div>
@@ -193,59 +193,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Maven Project Layout
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../layout/" class="md-nav__link">
         Maven Project Layout
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#files-and-folders" class="md-nav__link">
-    Files and Folders
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#groupid-artifactid-packages" class="md-nav__link">
-    GroupId, ArtifactId, Packages
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -346,11 +298,59 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../pmd/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Project Meets Deadline
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Project Meets Deadline
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tweaks" class="md-nav__link">
+    Tweaks
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -382,15 +382,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#files-and-folders" class="md-nav__link">
-    Files and Folders
+  <a href="#configuration" class="md-nav__link">
+    Configuration
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#groupid-artifactid-packages" class="md-nav__link">
-    GroupId, ArtifactId, Packages
+  <a href="#tweaks" class="md-nav__link">
+    Tweaks
   </a>
   
 </li>
@@ -409,36 +409,49 @@
                 
 
 
-<h1 id="project-layout">Project Layout</h1>
-<p>You might be used to a discovery like project setup, where you just throw in you code files at random place into the project, then hopefully click a green triangle start button in your IDE and cross you fingers it will magically work.</p>
-<p>While this may work for tiny projects or little scripting codebases that you hammer out in a day, bigger software projects often have a long list of requirements and likewise are expected to compile and run reliable no matter to platform or developer cloning the project.</p>
-<p>This is where maven enters the game. Maven replaces the click based project configuration (where a developer sets up their project via IDE menus), by a central xml textual description, the <code>`pom.xml</code>.</p>
-<p>The good news is: Once the <code>pom.xml</code> is set up, no one ever needs to touch a UI menu again.</p>
-<h2 id="files-and-folders">Files and Folders</h2>
-<p>The root of a maven project should roughly look like this:
-<img alt="folderlayout" src="../captures/folderlayout.png" /></p>
-<p>Before we go into the details, note that there are two important entires at root level:</p>
-<ul>
-<li><code>pom.xml</code> which contains all project configuration. Almost everything presented on this webpage are snippets that extend this file.</li>
-<li>A <code>src</code> folder, all your source code, tests, even resources go somewhere into that folder.</li>
-</ul>
-<p>Depending on which configurations you add to your <code>pom.xml</code>, you might have additional content on top level. But for a start these are the minimum requirement for your project at root level.</p>
-<p>Next let's look at the nested content of the <code>src</code> folder. Everything that carries a red marker in the capture above must be in place <strong>exactly as shown</strong>. If you alter that structure, your project simply is not valid and there are zero guarantees for what happens when someone else attempts to build and run it.</p>
-<ul>
-<li>Your java sources go into <code>src/main/java</code></li>
-<li>Your java tests fo into <code>src/test/java</code></li>
-<li>Your resource files go into <code>src/main/resources</code></li>
-</ul>
-<h2 id="groupid-artifactid-packages">GroupId, ArtifactId, Packages</h2>
-<p>In the <code>test/java</code> and <code>src/java</code> folder you see subfolders: <code>eu/kartoffelquadrat/printer</code>.</p>
-<ul>
-<li><code>eu/kartoffelquadrat</code> has a blue label. This on represents your <code>groupId</code>. The <code>groupId</code> is specific to the developer (or team of developers) responsible for the project. By convention it is the inverted domain name of your affiliation. So for instance if you are a student at McGill you could use: <code>ca/mcgill</code> instead of <code>eu/kartoffelquadrat</code>. It can also be longer than two segments, but it seems to have become an unwritten convention to use two segments.  <blockquote>
-<p><strong>Do not use <code>eu/kartoffelquadrat</code> for your projects.</strong> That domain is owned by me, so you better not pretend to release software on my behalf. ;)</p>
-</blockquote>
-</li>
-<li><code>liveprogramming</code> is the <code>artifactId</code>. It has a yellow label. It describes the specific purpose of your project. For instance if you are developing a board game <em>tic tac toe</em> client, it could be <code>ticTacToeClient</code>.</li>
-<li>Optionally you can create further subfolders for sub-packages (purple label). E.g. if you have an MVC structure you can place parallel folders for <code>model</code>, <code>view</code>, <code>control</code> under your <code>artifactId</code>. Packages are optional for smaller projects, but for everything that has more than 5 classes, things can get very confusing without packages.</li>
-</ul>
+<h1 id="pmd">PMD</h1>
+<p><a href="https://en.wikipedia.org/wiki/PMD_(software)">PMD is a static source code analyzer</a> that can be highly configured to detect issues on a wide range, from poor coding, missing documentation to severe security or performance flaws.</p>
+<p>PMD can also be <a href="https://plugins.jetbrains.com/plugin/1137-pmdplugin">added to IntelliJ as graphical plugin</a>.</p>
+<h2 id="configuration">Configuration</h2>
+<p>Add the following plugin to your <code>pom.xml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cm">&lt;!-- PMD static code analysis --&gt;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">&lt;plugin&gt;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="nt">&lt;artifactId&gt;</span>maven-pmd-plugin<span class="nt">&lt;/artifactId&gt;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="nt">&lt;version&gt;</span>3.13.0<span class="nt">&lt;/version&gt;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="nt">&lt;configuration&gt;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="nt">&lt;rulesets&gt;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="cm">&lt;!-- full list: bestpractices, codestyle, design, documentation, errorprone, multithreading, performance--&gt;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="nt">&lt;ruleset&gt;</span>/category/java/bestpractices.xml<span class="nt">&lt;/ruleset&gt;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="nt">&lt;/rulesets&gt;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="cm">&lt;!-- failOnViolation is actually true by default, but can be disabled --&gt;</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="nt">&lt;failOnViolation&gt;</span>true<span class="nt">&lt;/failOnViolation&gt;</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="cm">&lt;!-- printFailingErrors is pretty useful --&gt;</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="nt">&lt;printFailingErrors&gt;</span>true<span class="nt">&lt;/printFailingErrors&gt;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="nt">&lt;linkXRef&gt;</span>false<span class="nt">&lt;/linkXRef&gt;</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="nt">&lt;/configuration&gt;</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="nt">&lt;executions&gt;</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="nt">&lt;execution&gt;</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="nt">&lt;goals&gt;</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            <span class="nt">&lt;goal&gt;</span>check<span class="nt">&lt;/goal&gt;</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        <span class="nt">&lt;/goals&gt;</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="cm">&lt;!-- Enforce the pmd:check goal is auto-executed during package phase--&gt;</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="nt">&lt;/execution&gt;</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="nt">&lt;/executions&gt;</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="nt">&lt;/plugin&gt;</span>
+</code></pre></div>
+<p>The plugin in configured to be automcatically executed on every <code>mvn clean package</code>. To run the code analysis without the full <code>package</code> phase, type: <code>mvn clean pmd:check</code>.</p>
+<h2 id="tweaks">Tweaks</h2>
+<p>Above default configuration only tests for codestyle violations. To get the full range of feedback, enable the full <code>rulesets</code> list:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>    <span class="nt">&lt;ruleset&gt;</span>/category/java/bestpractices.xml<span class="nt">&lt;/ruleset&gt;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="nt">&lt;ruleset&gt;</span>/category/java/codestyle.xml<span class="nt">&lt;/ruleset&gt;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="nt">&lt;ruleset&gt;</span>/category/java/design.xml<span class="nt">&lt;/ruleset&gt;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="nt">&lt;ruleset&gt;</span>/category/java/documentation.xml<span class="nt">&lt;/ruleset&gt;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="nt">&lt;ruleset&gt;</span>/category/java/errorprone.xml<span class="nt">&lt;/ruleset&gt;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="nt">&lt;ruleset&gt;</span>/category/java/multithreading.xml<span class="nt">&lt;/ruleset&gt;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="nt">&lt;ruleset&gt;</span>/category/java/performance.xml<span class="nt">&lt;/ruleset&gt;</span>
+</code></pre></div>
 
               
             </article>
@@ -452,7 +465,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Welcome" rel="prev">
+        <a href="../bestpractices/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Best Practices" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -461,26 +474,11 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Welcome
+              Best Practices
             </div>
           </div>
         </a>
       
-      
-        
-        <a href="../minimalpom/" class="md-footer__link md-footer__link--next" aria-label="Next: Minimal Pom" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Minimal Pom
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
       
     </nav>
   

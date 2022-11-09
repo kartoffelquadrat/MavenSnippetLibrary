@@ -9,6 +9,7 @@ nav:
     - Artifact Build: artifactbuild.md
     - IDE Integration: ideintegration.md
     - Best Practices: bestpractices.md
+    - Project Meets Deadline: pmd.md
 theme:
   name: material
   logo: assets/logo.png
