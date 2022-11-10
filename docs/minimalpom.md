@@ -51,7 +51,7 @@ Create the ```pom.xml``` at top level of your project, then paste in the below t
     <!-- Override default name of generated artifacts -->
     <finalName>${build.name}</finalName>
     <plugins>
-                </plugins>
+    </plugins>
   </build>
 </project>
 ```
