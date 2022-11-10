@@ -143,21 +143,17 @@ But don't forget to actually code good unit tests! Those belong into the ```src/
 Here is a little stub of what a simple test java class may look like:
 
 ```java
-package eu.kartoffelquadrat.whatever;
+package ca.mcgill.countingsheep.model;
 
 import org.junit.Test;
 
-/**
- * Simple demo test...
- *
- * @author Maximilian Schiedermeier
- */
-public class PrinterVsLoggerTest {
+public class SheepTest {
 
   @Test
-  public void testPrinter() {
-    AssertTrue(...);
-  }
+  public void testSheep() {
 
+    Sheep keksli = new Sheep("Keksli");
+    assert keksli.getName().equals("Keksli");
+  }
 }
 ```
