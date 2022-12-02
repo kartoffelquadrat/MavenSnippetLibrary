@@ -1,7 +1,7 @@
 # Build Best Practices
 
 Just because a program seemingly works, that does not mean it is free of errors or well written code.  
-Most codes agree that code gains significantly in quality, if:
+Most good programmers agree that code gains significantly in quality, if:
 
  * Style-Checked
  * Documented
