@@ -271,6 +271,19 @@
     The Classpath
   </a>
   
+    <nav class="md-nav" aria-label="The Classpath">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-now-just-download-everything-yourself" class="md-nav__link">
+    Why now just download everything yourself?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -427,6 +440,19 @@
     The Classpath
   </a>
   
+    <nav class="md-nav" aria-label="The Classpath">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-now-just-download-everything-yourself" class="md-nav__link">
+    Why now just download everything yourself?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -476,20 +502,34 @@
 
 
 <h1 id="compile-time-dependencies">Compile Time Dependencies</h1>
-<p>Most programmers at first are puzzled by the complexity of library integration. The habit of graphically dragging libraries at random points into your IDE unfortunately conceals the actual complexity of code dependencies.</p>
+<p>Most programmers at first are puzzled by the complexity of library integration, and the technical debt that comes along. The habit of graphically dragging libraries at random points into your IDE unfortunately conceals the actual complexity and significance of dependencies.</p>
 <h2 id="motivation">Motivation</h2>
-<p>While the drag and drop approach might work for a single developer and a simple project, it is not a reliable approach for fast workstation setup or even scenarios where no graphical access to the code exists (e.g. compiling on a server via SSH).</p>
+<p>While the drag and drop approach might work for a single developer and a simple project, it is not a reliable approach for project setup or even scenarios where no graphical access to the code exists (e.g. compiling on a server via SSH).</p>
 <h3 id="the-classpath">The Classpath</h3>
-<p>What actually happens when you try to compile a piece of software (depending on a library call) is that the java compiler sets out for journey to localize the library you are referring to.  Unfortunately by just writing the import statement, or calling a library the compiler has no clue where to actually find the library byte code. What the <a href="https://stackoverflow.com/a/2396759">compiler actually needs is a <code>classpath</code></a> reference, pin-pointing exactly to a valid location on disk. (The <code>classpath</code> is a bit like the <code>PATH</code> variable on your operating system. It indexes all the software installed, only in this case specifically for java libraries)</p>
+<p>What actually happens when you compile a piece of software that uses a library, is that the java compiler sets out for journey to localize that library on your system.</p>
+<ul>
+<li>Unfortunately just writing the import statement, or calling a library is insufficient - the compiler has no clue where to actually find the library's byte code.</li>
+<li>What the <a href="https://stackoverflow.com/a/2396759">compiler actually needs is a <code>classpath</code></a> reference: That is to say a reference, pin-pointing exactly to a location on your disk.</li>
+<li>The java <code>classpath</code> is an environment variably, listing all the places on your disk with potentially relevant libraries. You can think of the <code>classpath</code> a bit like the Operating System's <code>PATH</code> variable: It references all the software (respectively java libraries) installed, only in this case specifically for java libraries)</li>
+</ul>
+<p>When you drag a JAR into your IDE, under the hood the software performs a classpath extension. This is convenient if you are the only one coding. However, there are good reasons to keep track of all dependencies in a textual, structured way.</p>
+<h4 id="why-now-just-download-everything-yourself">Why now just download everything yourself?</h4>
 <ul>
 <li>
-<p>In principle you could manually download all libraries your project needs and manually alter the <code>classpath</code> every time you compile or run your software. When you drag and drop a library jar file on your IDE that process might happen implicitly.</p>
+<p>In principle you could manually download all libraries your project needs and manually alter the <code>classpath</code>. You could keep donwloading JARs and run the drag and drop approach for every developer who uses your code.</p>
 </li>
 <li>
-<p>The problem is that drag and drop only solves the issue for the very machine you are working on, not for any other developer who clones your project.</p>
+<p>In the best case you have a good software documentation that tells developers the complete list and where to get these JARs. Also you ensure the documentation is always up to date.</p>
+</li>
+<li>
+<p>Most likely you will eventually forget to list a dependency. Or one of the JARs is no longer available for download, or people will just refuse to download the long list of dependencies manually and dragging and dropping them every time they set up a new machine.</p>
+</li>
+<li>
+<p>There might also be a security issue in one of the libraries, but since you do not specify your dependencies in a standardized form auto-notifiers such as <a href="https://github.com/dependabot">GitHubs Dependabot</a> are not going to tell you.</p>
 </li>
 </ul>
-<p>This is once more where maven comes to rescue. Maven has a dedicated part in the <code>pom.xml</code> file to indicate all dependencies textually. Since the <code>pom.xml</code> resides alongside the sources of your project, everyone who want to work with your project automatically gets all it's dependencies, stored between the <code>&lt;dependencies&gt;...&lt;/dependencies&gt;</code> tags.</p>
+<p>This is once more where maven comes to rescue. Maven has a dedicated part in the <code>pom.xml</code> file to indicate all dependencies textually. Since the <code>pom.xml</code> resides alongside the sources of your project, everyone who wants to work with your project automatically gets all dependencies, specified between the <code>&lt;dependencies&gt;...&lt;/dependencies&gt;</code> tags.<br />
+Nobody needs to manually download the decencies. Maven contacts official servers to download cryptographically signed versions of your dependencies, and adds them automatically to your classpath.</p>
 <h3 id="mavens-dependency-model">Mavens Dependency Model</h3>
 <p>The Maven <code>pom.xml</code> only stores a unique description of your dependencies, not the referenced libraries themselves. Luckily! Otherwise your repository would rapidly exceed a tolerable size.</p>
 <p>A dependency entry might look like this:  </p>
@@ -499,17 +539,18 @@
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="nt">&lt;version&gt;</span>2.11.0<span class="nt">&lt;/version&gt;</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
-<p>When Maven finds the above entry, it will run the following procedure:</p>
+<p>When Maven spots the above <code>pom.xml</code> entry, it will run the following procedure:</p>
 <ul>
-<li>Check if you already have the referenced dependency locally (maven has a local buffer in your homedirectory <code>.m2</code> folder)</li>
+<li>Check if you already have the referenced dependency locally (maven has a local buffer in your homedirectory <code>.m2</code> folder - It can be safely deleted if you run out of space.)</li>
 <li>If not yet found locally, maven contacts the official library servers and downloads the jar for you. It then stores it in your local buffer, so things are faster next time.</li>
-<li>Once the dependency resolved, Maven adds the locally downloaded artifact to your <code>CLASSPATH</code>. This means starting now, any occurence of the library reference can now be correctly resolved.</li>
+<li>Once the dependency resolved, Maven adds the locally downloaded artifact to your <code>CLASSPATH</code>. This means starting now, any occurrence of the library reference can now be correctly resolved.</li>
 </ul>
 <p>The great thing about this procedure is:<br />
 If your pom.xml evolves, all developers have automatically the full list of all dependencies, and the right versions - without a single mouse click in IDE menus!</p>
 <h2 id="finding-libraries">Finding Libraries</h2>
-<p>At this point you might wonder how on earth you are supposed to figure out the correct dependency entry for each and any java library you might ever need.<br />
-Luckily this part has been made very simple for you: If e.g. you are looking for the <em>Apache Commons IO</em> library, to conveniently load files from disk you can simply:</p>
+<p>At this point you might how you can figure out the correct dependency entry for each and any java library you might ever need.<br />
+Luckily this part has been made very simple for you. Most libraries are indexed in the official repos:<br />
+If e.g. you are looking for the <em>Apache Commons IO</em> library, to conveniently load files from disk you can simply:</p>
 <ul>
 <li>Visit the maven central, a world wide collection of most public libraries: <a href="https://mvnrepository.com/">https://mvnrepository.com/</a></li>
 <li>Search for the needed artifact: Type e.g.<a href="https://mvnrepository.com/artifact/commons-io/commons-io">Apache Commons IO</a></li>
@@ -523,7 +564,7 @@ Luckily this part has been made very simple for you: If e.g. you are looking for
 </code></pre></div></li>
 </ul>
 <h3 id="sample-library-use">Sample Library Use</h3>
-<p>Now that maven has conveniently placed the commons-io library on your <code>classpath</code> you can directly access it from source code.<br />
+<p>Now that maven has conveniently placed the <code>commons-io</code> library on your <code>classpath</code> you can directly access it from source code.<br />
 (Don't forget to actually import the library!)</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">package</span> <span class="nn">eu.kartoffelquadrat.liveprogramming</span><span class="p">;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>

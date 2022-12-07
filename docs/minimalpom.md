@@ -60,11 +60,11 @@ Create the ```pom.xml``` at top level of your project, then paste in the below t
 
 Next go over below list and make sure to updated the indicated fields:
 
- * Replace the ```groupId``` tag content by something that [describes your group](layout/#groupid-artifactid-packages).
- * Replace the ```artifactId``` tag content by something that [describes your project purpose](layout/#groupid-artifactid-packages).
+ * Replace the ```groupId``` tag content by something that [describes your group](../layout/#groupid-artifactid-packages).
+ * Replace the ```artifactId``` tag content by something that [describes your project purpose](../layout/#groupid-artifactid-packages).
  * Update the ```name``` tag to a single human readable word, describing your product.
  * Update the ```build.name``` variable to a camelCase description of your product, as you want the generated executable file to be named.
- * **Update the developer name and info! Do not use my name!**
+ * **Update the developer name and info.**
  * Choose a license, or remove the license block if you want to reserve all rights.
 
 ## Hello World
