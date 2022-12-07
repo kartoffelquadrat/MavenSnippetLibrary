@@ -248,6 +248,19 @@
     Files and Folders
   </a>
   
+    <nav class="md-nav" aria-label="Files and Folders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src-layout" class="md-nav__link">
+    SRC Layout
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -421,6 +434,19 @@
     Files and Folders
   </a>
   
+    <nav class="md-nav" aria-label="Files and Folders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src-layout" class="md-nav__link">
+    SRC Layout
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -465,25 +491,27 @@
 </blockquote>
 <p>Before we go into the details, note that there are two important entities at root level:</p>
 <ul>
-<li><code>pom.xml</code> which contains all project configuration. Almost everything presented on this webpage are snippets that extend this file.</li>
-<li>A <code>src</code> folder, all your source code, tests, even resources go somewhere into that folder.</li>
+<li><code>pom.xml</code> which contains all project configuration. Almost everything presented over the next pages are snippets that extend this file.</li>
+<li>A <code>src</code> folder for all your source code, tests and resources.</li>
 </ul>
-<p>Depending on which configurations you add to your <code>pom.xml</code>, you might have additional content on top level. But for a start these are the minimum requirement for your project at root level.</p>
-<p>Next let's look at the nested content of the <code>src</code> folder. Everything that carries a red marker in the capture above must be in place <strong>exactly as shown</strong>. If you alter that structure, your project simply is not valid and there are zero guarantees for what happens when someone else attempts to build and run it.</p>
+<p>Depending on which configurations you add to your <code>pom.xml</code>, you might have additional content on top level. But for a start these two are the minimum compile requirements for your project at root level.</p>
+<h4 id="src-layout">SRC Layout</h4>
+<p>Next let's look at the nested content of the <code>src</code> folder. Everything that carries a red marker in the capture above must be in place <strong>exactly as shown</strong>. If you alter that structure, your project simply is not valid and there are zero guarantees for what happens when you attempt to run it.</p>
+<p>Conventions:</p>
 <ul>
-<li>Your java sources go into <code>src/main/java</code></li>
-<li>Your java tests go into <code>src/test/java</code></li>
+<li>Your java sources goes into subfolders of <code>src/main/java</code></li>
+<li>Your java tests go into subfolders of <code>src/test/java</code></li>
 <li>Your resource files go into <code>src/main/resources</code></li>
 </ul>
 <h3 id="groupid-artifactid-packages">GroupId, ArtifactId, Packages</h3>
-<p>In the <code>test/java</code> and <code>src/java</code> folder you see subfolders: <code>eu/kartoffelquadrat/printer</code>.</p>
+<p>In the <code>test/java</code> and <code>src/java</code> folder you see subfolders: <code>eu/kartoffelquadrat/liveprogramming/comp303/corp</code>.</p>
 <ul>
-<li><code>eu/kartoffelquadrat</code> has a blue label. This on represents your <code>groupId</code>. The <code>groupId</code> is specific to the developer (or team of developers) responsible for the project. By convention it is the inverted domain name of your affiliation. So for instance if you are a student at McGill you could use: <code>ca/mcgill</code> instead of <code>eu/kartoffelquadrat</code>. It can also be longer than two segments, but it seems to have become an unwritten convention to use two segments.  <blockquote>
-<p><strong>Do not use <code>eu/kartoffelquadrat</code> for your projects.</strong> That domain is owned by me, so you better not pretend to release software on my behalf. ;)</p>
+<li><code>eu/kartoffelquadrat</code> has a blue label. This on represents your <code>groupId</code>. The <code>groupId</code> is specific to the developer or code maintainer responsible for the project. By convention it is the inverted domain name of your affiliation. So for instance if you are a student at McGill you could use: <code>ca/mcgill</code> instead of <code>eu/kartoffelquadrat</code>. It can also be longer than two segments, but it seems to have become an unwritten convention to use two segments.  <blockquote>
+<p>Do not use <code>eu/kartoffelquadrat</code> for <strong>your</strong> projects. If in doubt, you can always use <code>github.yourgithubname</code>.</p>
 </blockquote>
 </li>
 <li><code>liveprogramming</code> is the <code>artifactId</code>. It has a yellow label. It describes the specific purpose of your project. For instance if you are developing a board game <em>tic tac toe</em> client, it could be <code>ticTacToeClient</code>.</li>
-<li>Optionally you can create further subfolders for sub-packages (purple label). E.g. if you have an MVC structure you can place parallel folders for <code>model</code>, <code>view</code>, <code>control</code> under your <code>artifactId</code>. Packages are optional for smaller projects, but for everything that has more than 5 classes, things can get very confusing without packages.</li>
+<li>Optionally you can create further subfolders for sub-packages (purple label). E.g. if you have an MVC structure you can place parallel folders for <code>model</code>, <code>view</code>, <code>control</code> under your <code>artifactId</code>. Packages are optional for smaller projects, but for everything that has more than 5 classes, I'd recommend extra packages, just to keep things somewhat modular.</li>
 </ul>
 
               
