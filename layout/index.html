@@ -229,16 +229,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#files-and-folders" class="md-nav__link">
-    Files and Folders
+  <a href="#problem-statement" class="md-nav__link">
+    Problem Statement
   </a>
   
 </li>
       
         <li class="md-nav__item">
+  <a href="#mavens-contribution" class="md-nav__link">
+    Maven's Contribution
+  </a>
+  
+    <nav class="md-nav" aria-label="Maven's Contribution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#files-and-folders" class="md-nav__link">
+    Files and Folders
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#groupid-artifactid-packages" class="md-nav__link">
     GroupId, ArtifactId, Packages
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -382,16 +402,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#files-and-folders" class="md-nav__link">
-    Files and Folders
+  <a href="#problem-statement" class="md-nav__link">
+    Problem Statement
   </a>
   
 </li>
       
         <li class="md-nav__item">
+  <a href="#mavens-contribution" class="md-nav__link">
+    Maven's Contribution
+  </a>
+  
+    <nav class="md-nav" aria-label="Maven's Contribution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#files-and-folders" class="md-nav__link">
+    Files and Folders
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#groupid-artifactid-packages" class="md-nav__link">
     GroupId, ArtifactId, Packages
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -410,14 +450,20 @@
 
 
 <h1 id="project-layout">Project Layout</h1>
-<p>You might be used to a discovery like project setup, where you just throw in you code files at random place into the project, then hopefully click a green triangle start button in your IDE and cross you fingers it will magically work.</p>
-<p>While this may work for tiny projects or little scripting codebases that you hammer out in a day, bigger software projects often have a long list of requirements and likewise are expected to compile and run reliable no matter to platform or developer cloning the project.</p>
-<p>This is where maven enters the game. Maven replaces the click based project configuration (where a developer sets up their project via IDE menus), by a central xml textual description, the <code>`pom.xml</code>.</p>
-<p>The good news is: Once the <code>pom.xml</code> is set up, no one ever needs to touch a UI menu again.</p>
-<h2 id="files-and-folders">Files and Folders</h2>
+<p>In practice, a solid project setup should be more than just throwing code files at random place into a contrived project structure. </p>
+<h2 id="problem-statement">Problem Statement</h2>
+<p>Unfortunately I've experienced that in many student projects it comes down to exactly this: A chaotic project layout that has grown over time and no one wants to tamper with. To start a project you need to first click your way through IDE specific menus, then hopefully click on a green triangle start button and cross you fingers that the project will magically work.</p>
+<p>For little scripting codebases hammered out in a day this might work - but larger software projects often showcase a list of dependencies, and the barrier for new developers to set up their IDE should be as low as possible. You want a mechanism that allows you to compile and run your code reliably, no matter to platform or developer cloning the project - without tedious project configurations on every new clone.</p>
+<h2 id="mavens-contribution">Maven's Contribution</h2>
+<p>This is where maven enters the game. Maven replaces the click based IDE project configuration (where a developer sets up their project requirements and plugins via IDE menus), by <strong>just one central xml textual description</strong>: the <strong><code>pom.xml</code></strong>.</p>
+<p>Crafting a good <code>pom.xml</code> takes some effort - but the good news is: once the <code>pom.xml</code> is set up, no one ever needs to touch a UI menu again. Libraries and coding conventions are no longer stored in the project, but referenced form a central repository. This keeps your repo slim and allows every client to reliably pull all dependencies at compile time.</p>
+<h3 id="files-and-folders">Files and Folders</h3>
 <p>The root of a maven project should roughly look like this:
 <img alt="folderlayout" src="../captures/folderlayout.png" /></p>
-<p>Before we go into the details, note that there are two important entires at root level:</p>
+<blockquote>
+<p>Sample project structure is a modified selection of the <a href="https://github.com/prmr/COMP303Starter">COMP303 Starter</a> code.</p>
+</blockquote>
+<p>Before we go into the details, note that there are two important entities at root level:</p>
 <ul>
 <li><code>pom.xml</code> which contains all project configuration. Almost everything presented on this webpage are snippets that extend this file.</li>
 <li>A <code>src</code> folder, all your source code, tests, even resources go somewhere into that folder.</li>
@@ -426,10 +472,10 @@
 <p>Next let's look at the nested content of the <code>src</code> folder. Everything that carries a red marker in the capture above must be in place <strong>exactly as shown</strong>. If you alter that structure, your project simply is not valid and there are zero guarantees for what happens when someone else attempts to build and run it.</p>
 <ul>
 <li>Your java sources go into <code>src/main/java</code></li>
-<li>Your java tests fo into <code>src/test/java</code></li>
+<li>Your java tests go into <code>src/test/java</code></li>
 <li>Your resource files go into <code>src/main/resources</code></li>
 </ul>
-<h2 id="groupid-artifactid-packages">GroupId, ArtifactId, Packages</h2>
+<h3 id="groupid-artifactid-packages">GroupId, ArtifactId, Packages</h3>
 <p>In the <code>test/java</code> and <code>src/java</code> folder you see subfolders: <code>eu/kartoffelquadrat/printer</code>.</p>
 <ul>
 <li><code>eu/kartoffelquadrat</code> has a blue label. This on represents your <code>groupId</code>. The <code>groupId</code> is specific to the developer (or team of developers) responsible for the project. By convention it is the inverted domain name of your affiliation. So for instance if you are a student at McGill you could use: <code>ca/mcgill</code> instead of <code>eu/kartoffelquadrat</code>. It can also be longer than two segments, but it seems to have become an unwritten convention to use two segments.  <blockquote>

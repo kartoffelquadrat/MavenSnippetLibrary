@@ -1,19 +1,27 @@
 # Project Layout
 
-You might be used to a discovery like project setup, where you just throw in you code files at random place into the project, then hopefully click a green triangle start button in your IDE and cross you fingers it will magically work.
+In practice, a solid project setup should be more than just throwing code files at random place into a contrived project structure. 
 
-While this may work for tiny projects or little scripting codebases that you hammer out in a day, bigger software projects often have a long list of requirements and likewise are expected to compile and run reliable no matter to platform or developer cloning the project.
+## Problem Statement
 
-This is where maven enters the game. Maven replaces the click based project configuration (where a developer sets up their project via IDE menus), by a central xml textual description, the ```pom.xml``.
+Unfortunately I've experienced that in many student projects it comes down to exactly this: A chaotic project layout that has grown over time and no one wants to tamper with. To start a project you need to first click your way through IDE specific menus, then hopefully click on a green triangle start button and cross you fingers that the project will magically work.
 
-The good news is: Once the ```pom.xml``` is set up, no one ever needs to touch a UI menu again.
+For little scripting codebases hammered out in a day this might work - but larger software projects often showcase a list of dependencies, and the barrier for new developers to set up their IDE should be as low as possible. You want a mechanism that allows you to compile and run your code reliably, no matter to platform or developer cloning the project - without tedious project configurations on every new clone.
 
-## Files and Folders
+## Maven's Contribution
+
+This is where maven enters the game. Maven replaces the click based IDE project configuration (where a developer sets up their project requirements and plugins via IDE menus), by **just one central xml textual description**: the **```pom.xml```**.
+
+Crafting a good ```pom.xml``` takes some effort - but the good news is: once the ```pom.xml``` is set up, no one ever needs to touch a UI menu again. Libraries and coding conventions are no longer stored in the project, but referenced form a central repository. This keeps your repo slim and allows every client to reliably pull all dependencies at compile time.
+
+### Files and Folders
 
 The root of a maven project should roughly look like this:
 ![folderlayout](../captures/folderlayout.png)
 
-Before we go into the details, note that there are two important entires at root level:
+ > Sample project structure is a modified selection of the [COMP303 Starter](https://github.com/prmr/COMP303Starter) code.
+
+Before we go into the details, note that there are two important entities at root level:
 
  * ```pom.xml``` which contains all project configuration. Almost everything presented on this webpage are snippets that extend this file.
  * A ```src``` folder, all your source code, tests, even resources go somewhere into that folder.
@@ -23,10 +31,10 @@ Depending on which configurations you add to your ```pom.xml```, you might have 
 Next let's look at the nested content of the ```src``` folder. Everything that carries a red marker in the capture above must be in place **exactly as shown**. If you alter that structure, your project simply is not valid and there are zero guarantees for what happens when someone else attempts to build and run it.
 
  * Your java sources go into ```src/main/java```
- * Your java tests fo into ```src/test/java```
+ * Your java tests go into ```src/test/java```
  * Your resource files go into ```src/main/resources```
 
-## GroupId, ArtifactId, Packages
+### GroupId, ArtifactId, Packages
 
 In the ```test/java``` and ```src/java``` folder you see subfolders: ```eu/kartoffelquadrat/printer```.
 
