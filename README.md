@@ -4,7 +4,7 @@ This is a little repo to provide tested and proven maven snipped, ready for copy
 
 ## Access
 
-The Maven Snippet Library is [hosted on Github Pages](https://kartoffelquadrat.github.io/MavenSnippetLibrary).
+The Maven Snippet Library is [hosted on Github Pages](https://m5c.github.io/MavenSnippetLibrary).
 
 ## Build
 
@@ -25,6 +25,6 @@ mkdocs serve
 ## Contact / Pull Requests
 
  * Author: Maximilian Schiedermeier
- * Github: Kartoffelquadrat
+ * Github: [m5c](https://github.com/m5c)
  * Webpage: https://www.cs.mcgill.ca/~mschie3
  * License: [MIT](https://opensource.org/licenses/MIT)
