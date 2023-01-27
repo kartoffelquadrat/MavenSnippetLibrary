@@ -8,7 +8,7 @@ This web page hosts a step by step guide, that takes you from a minimal valid co
 
 ## Contributions
 
-Feel free to report errors or suggestions via merge requests to [https://github.com/kartoffelqudrat/MavenSnippetLibrary](https://github.com/kartoffelquadrat/MavenSnippetLibrary).
+Feel free to report errors or suggestions via merge requests to [https://github.com/m5c/MavenSnippetLibrary](https://github.com/m5c/MavenSnippetLibrary).
 
 Note that you need [mkdocs](https://squidfunk.github.io/mkdocs-material/) to build the webpage. The site is generated from markdowns, so make sure to edit those, not the HTML files.
 
